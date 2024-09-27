@@ -3,16 +3,19 @@ project:
   output-dir: docs
 
 website:
-  title: "ryangreen6.github.io"
+  title: "Ryan Green"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - resources.qmd
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: Yeti
+      dark: Vapor
     css: styles.css
     toc: true
 
