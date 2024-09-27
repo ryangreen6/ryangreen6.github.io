@@ -1,11 +1,17 @@
 ---
-title: "ryangreen6.github.io"
+title: "Ryan Green"
+image: Ryan.jpeg
+about:
+  template: jolla
+  image-shape: round
+  links: 
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/ryan-green-59239a174/
+      target: _blank
+    - text: GitHub
+      href: https://github.com/ryangreen6
+      target: _blank
+    - text: Email
+      href: mailto:ryangreen@ucsb.edu
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-```{r}
-1 + 1
-```
