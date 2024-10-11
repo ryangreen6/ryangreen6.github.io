@@ -1,0 +1,59 @@
+/*-- scss:defaults --*/
+
+// Import google fonts:
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+// Create font Variables
+// you can create variables for font families, just like colors:
+
+$lora: "Lora", serif;
+
+// Colors 
+$lavender: #757BD6;
+$fawn: #F2B880;
+$seashell: #FFF4EC;
+$terracotta: #BD6E53;
+$lightblue: #B8D3D1;
+$verdigris: #5BC0BE;
+$ashgray: #9BC1BC;
+
+
+// Quarto Sass Variables # what color do I want where?
+
+$body-bg: $seashell; // this adjusts background color 
+$navbar-bg: $terracotta;
+$footer-bg: $ashgray;
+
+
+
+/*-- scss:rules --*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $lora;
+}
+
+h1, h2 {
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.title {
+  color: maroon;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.lavender.text {
+  color: $lavender;
+}
+
+
+
+
+
+
+
+
+

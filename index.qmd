@@ -6,12 +6,20 @@ about:
   image-shape: round
   links: 
     - text: LinkedIn
+      icon: linkedin
       href: https://www.linkedin.com/in/ryan-green-59239a174/
       target: _blank
     - text: GitHub
+      icon: github
       href: https://github.com/ryangreen6
       target: _blank
     - text: Email
       href: mailto:ryangreen@ucsb.edu
+
 ---
 
+Ryan Green is pursuing a master's degree in Environmental Data Science to align his career with his passion for geography and spatial data. Ryan has a BA in Geography and Archaeology from Sonoma State University after finding love for these subjects at an early age.
+
+During his senior year at Sonoma State, Ryan studied abroad at the University of Ghana, Legon, where he focused on anthropology and archaeological field methods. He participated in the fourth field season of the Gonja Project, a collaborative excavation between the University of Ghana and the University of Geneva, Switzerland. He produced stratigraphy and feature maps of the site and contributed to the annual field publication. After returning to Sonoma State, Ryan took on a geoarchaeological study for his undergraduate dissertation, analyzing soil samples from across a Native American site in northern California to determine occupational patterns over time.
+
+He moved back to Santa Barbara after college and volunteered at the Natural History Museum's Anthropology Department, where he assisted in collections management and accessioning artifacts. Ryan has always been passionate about cultural resource management and mapping, and plans to put his master's degree to work in these fields using LiDAR and other geospatial techniques.
