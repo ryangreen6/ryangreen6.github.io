@@ -2,8 +2,10 @@
 title: "About"
 ---
 
-About this site
+## What I do for work
+<p class = "lavender.text"> some text goes here!</p>
 
-```{r}
-1 + 1
-```
+## What else do I do?
+
+
+[here is some more text]{.lavender.text}

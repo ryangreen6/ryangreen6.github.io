@@ -10,13 +10,16 @@ website:
         text: Home
       - about.qmd
       - resources.qmd
+      - text: Resume
+  page-footer: 
+    background: light
+    left: Copyright 2024, Ryan Green
+    right: Built with GitHub
 
 format:
   html:
-    theme: 
-      light: Yeti
-      dark: Vapor
-    css: styles.css
+    theme: styles.scss
+    mainfont: Lora
     toc: true
 
 editor: visual
