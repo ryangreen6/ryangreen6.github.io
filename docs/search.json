@@ -33,5 +33,40 @@
     "title": "Here is my level one header",
     "section": "",
     "text": "Here is my level one header\nHere is my first paragraph\nHere is my second paragraph, where you can read more about MEDS.\nThis is very important text!"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "blog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\n\na short catchy description of the post\n\n\n\nRyan Green\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/index.html#nice-this-is-my-second-section",
+    "href": "posts/2024-10-18-myfirstpost/index.html#nice-this-is-my-second-section",
+    "title": "blog post title",
+    "section": "Nice, this is my second section",
+    "text": "Nice, this is my second section\nAnother footnote? What? 2"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/index.html",
+    "href": "posts/2024-10-18-myfirstpost/index.html",
+    "title": "blog post title",
+    "section": "",
+    "text": "Let’s put some text in here 1"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/index.html#this-is-my-first-section",
+    "href": "posts/2024-10-18-myfirstpost/index.html#this-is-my-first-section",
+    "title": "blog post title",
+    "section": "",
+    "text": "Let’s put some text in here 1"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/index.html#footnotes",
+    "href": "posts/2024-10-18-myfirstpost/index.html#footnotes",
+    "title": "blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFootnote?↩︎\nYeah of course↩︎"
   }
 ]
