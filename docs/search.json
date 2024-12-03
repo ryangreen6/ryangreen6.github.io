@@ -152,5 +152,19 @@
     "title": "Thomas Fire False Color Analysis",
     "section": "Let’s get started…",
     "text": "Let’s get started…"
+  },
+  {
+    "objectID": "posts/thomasfireanalysis/220_final_project_index.html",
+    "href": "posts/thomasfireanalysis/220_final_project_index.html",
+    "title": "Thomas Fire False Color Analysis",
+    "section": "",
+    "text": "False Color Imagery is a visual representation technique to depict data in wavelengths outside the visible spectrum, by assigning visible colors to non-visible wavelengths. This is a common practice in remote sensing to show land features that are not easily discernible to the human eye. Some remote sensing satellites carry equipment to collect data in wavelengths outside the visible spectrum, like Near-Infrared (NIR) and Shortwave Infrared (SWIR). These wavelengths can then be reassigned and visualized to create false color images of the land surface, accentuating features that would otherwise have gone unnoticed.\nWhile this sounds tricky, it can be quite simple to code and visualize in programming languages, in this case Python. In this post, we will be using false color imagery to visualize the scar left behind by the Southern California Thomas Fire in December 2017, using data collected from the Landsat satellite.\nThe Thomas Fire was the largest wildfire in modern California history, covering an area of ~282,000 acres (1,141 sq km)1. The fire started on December 4, 2017, and destroyed more than a thousand structures before it was extinguished on January 12, 20182. After burning much of the South Santa Barbara County area, heavy rainfall3 in January 2018 presented significant risk of mudslides, ultimately resulting in the mudflow in Montecito, California, on January 9, 20184 5.\nThe purpose of this post is to act as an example of how to work with shapefiles in conjunction with raster data in Python. We will do simple exploration of the xarray.Dataset called landsat, an raster image of the Santa Barbara County area that contains data for visible, infrared, and near infrared color bands (wavelengths). We will then reassign these color bands to visible colors to generate a false color image, and overlay the boundary of the Thomas Fire."
+  },
+  {
+    "objectID": "posts/thomasfireanalysis/220_final_project_index.html#footnotes",
+    "href": "posts/thomasfireanalysis/220_final_project_index.html#footnotes",
+    "title": "Thomas Fire False Color Analysis",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nhttps://lpdaac.usgs.gov/resources/data-action/observing-thomas-fire-using-nasa-earth-data/↩︎\nhttps://www.fire.ca.gov/incidents/2017/12/4/thomas-fire/↩︎\nhttps://www.dailynews.com/2018/01/10/rain-is-done-how-much-did-we-get/↩︎\nhttps://www.latimes.com/local/lanow/la-me-ln-mudslide-recovery-mainbar-20180111-story.html↩︎\nBanner image sourced from: https://earthobservatory.nasa.gov/images/91379/smoke-and-fire-in-southern-california↩︎"
   }
 ]
