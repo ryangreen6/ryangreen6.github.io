@@ -11,7 +11,8 @@ website:
 #      - href: about.qmd
 #      - href: resources.qmd
       - text: Resume
-      - posts.qmd
+      - href: posts.qmd
+        text: Blog
   page-footer: 
     background: light
     left: Copyright 2024, Ryan Green

@@ -1,0 +1,69 @@
+---
+title: "Thomas Fire False-Color Analysis"
+description: " "
+author: 
+  - name: Ryan Green
+    url: https://ryangreen6.github.io/
+    affiliation: MEDS
+    affiliation-url:  https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 2024-12-07
+execute:
+  warning: false
+  message: false
+  results: hide
+categories: [Quarto, MEDS]
+toc: true
+#image:
+editor_options: 
+  chunk_output_type: console
+---
+
+
+- The purpose of this notebook is to show how to work with shapefiles and raster data, particularly `xarray.Datasets`. In this notebook, we will do simple exploration of the `xarray.Dataet` called `landsat`, which is an image of the Santa Barbara County area, and contains data for visible, infrared, and near infrared color bands. We will see how to generate false color images from this raster, where color bands can be rearranged to emphasize certain features on the image (for example, make the fire scar of the Thomas Fire much more visible). The dataset `landsat` comes from the Landsat satellite, and the data was sourced here: https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2
+
+# Testing
+## Out
+### Different 
+#### Headers
+
+
+
+## This is my first section!
+
+Let's put some text in here [^1]
+
+
+## Nice, this is my second section
+
+Another footnote? What? [^2]
+
+[^1]: Footnote?
+[^2]: Yeah of course
+
+
+```{r, results = 'hide'}
+# how does a code chunk look?
+
+library(tidyverse)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

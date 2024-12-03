@@ -39,7 +39,7 @@
     "href": "posts.html",
     "title": "Blog",
     "section": "",
-    "text": "blog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\n\na short catchy description of the post\n\n\n\nRyan Green\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Thomas Fire False-Color Analysis\n\n\n\nQuarto\n\n\nMEDS\n\n\n\n\n\n\n\nRyan Green\n\n\nDec 7, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTest Post\n\n\n\nQuarto\n\n\nMEDS\n\n\n\nLearning How to Make Blog Posts\n\n\n\nRyan Green\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/2024-10-18-myfirstpost/index.html#nice-this-is-my-second-section",
@@ -66,6 +66,69 @@
     "objectID": "posts/2024-10-18-myfirstpost/index.html#footnotes",
     "href": "posts/2024-10-18-myfirstpost/index.html#footnotes",
     "title": "blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFootnote?↩︎\nYeah of course↩︎"
+  },
+  {
+    "objectID": "posts/new post/220_final_project_index.html",
+    "href": "posts/new post/220_final_project_index.html",
+    "title": "Thomas Fire False-Color Analysis",
+    "section": "",
+    "text": "The purpose of this notebook is to show how to work with shapefiles and raster data, particularly xarray.Datasets. In this notebook, we will do simple exploration of the xarray.Dataet called landsat, which is an image of the Santa Barbara County area, and contains data for visible, infrared, and near infrared color bands. We will see how to generate false color images from this raster, where color bands can be rearranged to emphasize certain features on the image (for example, make the fire scar of the Thomas Fire much more visible). The dataset landsat comes from the Landsat satellite, and the data was sourced here: https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2"
+  },
+  {
+    "objectID": "posts/new post/220_final_project_index.html#this-is-my-first-section",
+    "href": "posts/new post/220_final_project_index.html#this-is-my-first-section",
+    "title": "Thomas Fire False-Color Analysis",
+    "section": "This is my first section!",
+    "text": "This is my first section!\nLet’s put some text in here 1"
+  },
+  {
+    "objectID": "posts/new post/220_final_project_index.html#nice-this-is-my-second-section",
+    "href": "posts/new post/220_final_project_index.html#nice-this-is-my-second-section",
+    "title": "Thomas Fire False-Color Analysis",
+    "section": "Nice, this is my second section",
+    "text": "Nice, this is my second section\nAnother footnote? What? 2\n\n# how does a code chunk look?\n\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "posts/new post/220_final_project_index.html#footnotes",
+    "href": "posts/new post/220_final_project_index.html#footnotes",
+    "title": "Thomas Fire False-Color Analysis",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nFootnote?↩︎\nYeah of course↩︎"
+  },
+  {
+    "objectID": "posts/new post/220_final_project_index.html#out",
+    "href": "posts/new post/220_final_project_index.html#out",
+    "title": "Thomas Fire False-Color Analysis",
+    "section": "Out",
+    "text": "Out\n\nDifferent\n\nHeaders"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/test_post.html",
+    "href": "posts/2024-10-18-myfirstpost/test_post.html",
+    "title": "Test Post",
+    "section": "",
+    "text": "Let’s put some text in here 1"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/test_post.html#this-is-my-first-section",
+    "href": "posts/2024-10-18-myfirstpost/test_post.html#this-is-my-first-section",
+    "title": "Test Post",
+    "section": "",
+    "text": "Let’s put some text in here 1"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/test_post.html#nice-this-is-my-second-section",
+    "href": "posts/2024-10-18-myfirstpost/test_post.html#nice-this-is-my-second-section",
+    "title": "Test Post",
+    "section": "Nice, this is my second section",
+    "text": "Nice, this is my second section\nAnother footnote? What? 2"
+  },
+  {
+    "objectID": "posts/2024-10-18-myfirstpost/test_post.html#footnotes",
+    "href": "posts/2024-10-18-myfirstpost/test_post.html#footnotes",
+    "title": "Test Post",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nFootnote?↩︎\nYeah of course↩︎"
   }
