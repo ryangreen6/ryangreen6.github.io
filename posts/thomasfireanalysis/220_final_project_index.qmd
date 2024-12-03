@@ -28,7 +28,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ![](pictures/banner.png)
 :::
 
-False Color Imagery is a visual representation technique to depict data in wavelengths outside the visible spectrum, by assigning visible colors to non-visible wavelengths. This is a common practice in remote sensing to show land features that are not easily discernible to the human eye. Some remote sensing satellites carry equipment to collect data in wavelengths outside the visible spectrum, like Near-Infrared (NIR) and Shortwave Infrared (SWIR). These wavelengths can then be reassigned and visualized to create false color images of the land surface, accentuating features that would otherwise have gone unnoticed.
+False Color Imagery is a visual representation technique to depict data in wavelengths outside the visible spectrum, by assigning visible colors to non-visible wavelengths. This is a common practice in remote sensing to show land features that are not easily discernible to the human eye. Some remote sensing satellites carry equipment to collect data in wavelengths outside the visible spectrum, like Near-Infrared (NIR) and Shortwave Infrared (SWIR). These wavelengths can then be reassigned and visualized to create false color images of the land surface, accentuating features that would otherwise go unnoticed.
 
 While this sounds tricky, it can be quite simple to code and visualize in programming languages, in this case Python. In this post, we will be using false color imagery to visualize the scar left behind by the Southern California Thomas Fire in December 2017, using data collected from the Landsat satellite.
 
@@ -60,24 +60,11 @@ import matplotlib.pyplot as plt
 
 ### Fire Data Loading and Exploration
 
-The fire perimeter data set is huge. In this code, we have narrowed down the data set to just the 2017 Thomas Fire, and created a new shapefile for its perimeter. This way we can save some time when running the code, as we won't have to load the entire dataset, only the data we need.
+The fire perimeter data set is huge, containing more than 20,000 fires. In this code, we have loaded and narrowed down the data set to just the 2017 Thomas Fire, and created a new shapefile for its perimeter. This way we can save some time when running the code, as we won't have to load the entire dataset, only the data we need.
 
 ``` python
 fires = gpd.read_file("fire_perimeters/California_Fire_Perimeters_(all).shp")
-```
 
-Now, we can do some simple exploration of the data. This is always an important step to get an idea of the data set as a whole.
-
-``` python
-print(fires.shape)
-print(fires.dtypes)
-```
-
-::: text-center
-![](pictures/fires.dtypes.png)
-:::
-
-``` python
 thomas_fire = fires[(fires['FIRE_NAME'] == 'THOMAS') & (fires['YEAR_'] == 2017)]
 
 thomas_fire.to_file("data/thomas_fire.shp")
@@ -202,10 +189,10 @@ fig.text(
 )
 
 ax.legend(
-    loc="center left",  # Position the legend on the right
-    bbox_to_anchor=(1, 0.5),  # Adjust the position to the right of the plot
+    loc="center left",
+    bbox_to_anchor=(1, 0.5),
     fontsize=10,
-    frameon=False  # Optional: Remove the frame around the legend
+    frameon=False
 )
 
 
