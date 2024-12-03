@@ -7,10 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Green">
-<meta name="dcterms.date" content="2024-10-18">
-<meta name="description" content="a short catchy description of the post">
+<meta name="dcterms.date" content="2024-12-07">
 
-<title>blog post title – Ryan Green</title>
+<title>Thomas Fire False-Color Analysis – Ryan Green</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -114,13 +147,8 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">blog post title</h1>
-                  <div>
-        <div class="description">
-          a short catchy description of the post
-        </div>
-      </div>
-                          <div class="quarto-categories">
+      <h1 class="title">Thomas Fire False-Color Analysis</h1>
+                                <div class="quarto-categories">
                 <div class="quarto-category">Quarto</div>
                 <div class="quarto-category">MEDS</div>
               </div>
@@ -149,7 +177,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">October 18, 2024</p>
+        <p class="date">December 7, 2024</p>
       </div>
     </div>
     
@@ -165,8 +193,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#this-is-my-first-section" id="toc-this-is-my-first-section" class="nav-link active" data-scroll-target="#this-is-my-first-section">This is my first section!</a></li>
+  <li><a href="#testing" id="toc-testing" class="nav-link active" data-scroll-target="#testing">Testing</a>
+  <ul class="collapse">
+  <li><a href="#out" id="toc-out" class="nav-link" data-scroll-target="#out">Out</a>
+  <ul class="collapse">
+  <li><a href="#different" id="toc-different" class="nav-link" data-scroll-target="#different">Different</a></li>
+  </ul></li>
+  <li><a href="#this-is-my-first-section" id="toc-this-is-my-first-section" class="nav-link" data-scroll-target="#this-is-my-first-section">This is my first section!</a></li>
   <li><a href="#nice-this-is-my-second-section" id="toc-nice-this-is-my-second-section" class="nav-link" data-scroll-target="#nice-this-is-my-second-section">Nice, this is my second section</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -177,6 +212,20 @@ ul.task-list li input[type="checkbox"] {
 
 
 
+<ul>
+<li>The purpose of this notebook is to show how to work with shapefiles and raster data, particularly <code>xarray.Datasets</code>. In this notebook, we will do simple exploration of the <code>xarray.Dataet</code> called <code>landsat</code>, which is an image of the Santa Barbara County area, and contains data for visible, infrared, and near infrared color bands. We will see how to generate false color images from this raster, where color bands can be rearranged to emphasize certain features on the image (for example, make the fire scar of the Thomas Fire much more visible). The dataset <code>landsat</code> comes from the Landsat satellite, and the data was sourced here: https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2</li>
+</ul>
+<section id="testing" class="level1">
+<h1>Testing</h1>
+<section id="out" class="level2">
+<h2 class="anchored" data-anchor-id="out">Out</h2>
+<section id="different" class="level3">
+<h3 class="anchored" data-anchor-id="different">Different</h3>
+<section id="headers" class="level4">
+<h4 class="anchored" data-anchor-id="headers">Headers</h4>
+</section>
+</section>
+</section>
 <section id="this-is-my-first-section" class="level2">
 <h2 class="anchored" data-anchor-id="this-is-my-first-section">This is my first section!</h2>
 <p>Let’s put some text in here <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
@@ -184,8 +233,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="nice-this-is-my-second-section" class="level2">
 <h2 class="anchored" data-anchor-id="nice-this-is-my-second-section">Nice, this is my second section</h2>
 <p>Another footnote? What? <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># how does a code chunk look?</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
+</section>
 </section>
 
 
