@@ -373,29 +373,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Cool!</p>
 <p>Now we can open the <code>xarray.DataArray</code> from our search:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lulc <span class="op">=</span> rioxr.open_rasterio(item.assets[<span class="st">'data'</span>].href)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lulc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>landcover <span class="op">=</span> rioxr.open_rasterio(item.assets[<span class="st">'data'</span>].href)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>landcover</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="text-center">
 <p><img src="pictures/GAPxarray.png" class="img-fluid"></p>
 </div>
-<p>At this point, our <code>lulc</code> <code>xarray.DataArray</code> is multidimensional. We’ll drop the <code>band</code> dimension and its variables, just as we did before:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lulc <span class="op">=</span> lulc.squeeze().drop_vars(<span class="st">'band'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>At this point, our <code>landcover</code> <code>xarray.DataArray</code> is multidimensional. We’ll drop the <code>band</code> dimension and its variables, just as we did before:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>landcover <span class="op">=</span> landcover.squeeze().drop_vars(<span class="st">'band'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To ensure proper mapping, we will ensure that the Thomas Fire perimeter shapefile is the same CRS as that of the land cover data. Use <code>assert</code> to run a quick test to ensure that the code worked properly.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Match CRSs and verify update</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>thomas_fire_match <span class="op">=</span> thomas_fire.to_crs(lulc.rio.crs)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> thomas_fire_match.crs <span class="op">==</span> lulc.rio.crs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>thomas_fire_match <span class="op">=</span> thomas_fire.to_crs(landcover.rio.crs)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> thomas_fire_match.crs <span class="op">==</span> landcover.rio.crs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we can make our first plot of the land cover data, clipped to the size of the Thomas Fire perimeter shapefile, using the <code>total_bounds</code> of <code>thomas_fire</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>lulc <span class="op">=</span> lulc.rio.write_nodata(<span class="dv">0</span>)</span>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>landcover <span class="op">=</span> landcover.rio.write_nodata(<span class="dv">0</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>lulc_clip <span class="op">=</span> (lulc.rio.clip_box(<span class="op">*</span>thomas_fire_match.total_bounds)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>landcover_clip <span class="op">=</span> (landcover.rio.clip_box(<span class="op">*</span>thomas_fire_match.total_bounds)</span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>              .rio.clip(thomas_fire_match.geometry))</span>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>lulc_clip.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>landcover_clip.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="text-center">
 <p><img src="pictures/thomasfireplot2.png" class="img-fluid"></p>
 </div>
-<p>Now that the land cover types within the Thomas Fire boundary are isolated, we can begin calculating land cover class statistics. The first line finds the counts of unique values in the <code>lulc_clip</code> <code>xarray.DataArray</code>. The second line assembles these counts into a dataframe called <code>pix_counts</code>. The third line merges <code>pix_counts</code> with the <code>labels</code> dataframe we loaded earlier, as well as removes any row where the code is NULL.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>values, counts <span class="op">=</span> np.unique(lulc_clip, return_counts <span class="op">=</span> <span class="va">True</span>)</span>
+<p>Now that the land cover types within the Thomas Fire boundary are isolated, we can begin calculating land cover class statistics. The first line finds the counts of unique values in the <code>landcover_clip</code> <code>xarray.DataArray</code>. The second line assembles these counts into a dataframe called <code>pix_counts</code>. The third line merges <code>pix_counts</code> with the <code>labels</code> dataframe we loaded earlier, as well as removes any row where the code is NULL.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>values, counts <span class="op">=</span> np.unique(landcover_clip, return_counts <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pix_counts <span class="op">=</span> pd.DataFrame({<span class="st">'code'</span>: values, <span class="st">'count'</span>: counts})</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
