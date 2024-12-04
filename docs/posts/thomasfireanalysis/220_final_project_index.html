@@ -8,6 +8,7 @@
 
 <meta name="author" content="Ryan Green">
 <meta name="dcterms.date" content="2024-12-07">
+<meta name="description" content="Mapping the Thomas Fire and Calculating Land Cover Statisics Using False Color Imagery">
 
 <title>Thomas Fire False Color Analysis – Ryan Green</title>
 <style>
@@ -148,7 +149,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Thomas Fire False Color Analysis</h1>
-                                <div class="quarto-categories">
+                  <div>
+        <div class="description">
+          Mapping the Thomas Fire and Calculating Land Cover Statisics Using False Color Imagery
+        </div>
+      </div>
+                          <div class="quarto-categories">
                 <div class="quarto-category">False Color Imagery</div>
                 <div class="quarto-category">Python</div>
                 <div class="quarto-category">EDS220</div>
@@ -162,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p><a href="https://ryangreen6.github.io/">Ryan Green</a> </p>
+               <p>Ryan Green </p>
             </div>
     </div>
       
@@ -185,11 +191,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#importing-necessary-packages" id="toc-importing-necessary-packages" class="nav-link active" data-scroll-target="#importing-necessary-packages">Importing necessary packages:</a></li>
+  <li><a href="#datasets" id="toc-datasets" class="nav-link active" data-scroll-target="#datasets">Datasets</a></li>
+  <li><a href="#importing-necessary-packages" id="toc-importing-necessary-packages" class="nav-link" data-scroll-target="#importing-necessary-packages">Importing necessary packages:</a></li>
   <li><a href="#fire-data-loading-and-exploration" id="toc-fire-data-loading-and-exploration" class="nav-link" data-scroll-target="#fire-data-loading-and-exploration">Fire Data Loading and Exploration</a></li>
   <li><a href="#landsat-data-loading-and-exploration" id="toc-landsat-data-loading-and-exploration" class="nav-link" data-scroll-target="#landsat-data-loading-and-exploration">Landsat Data Loading and Exploration</a></li>
   <li><a href="#false-color-image" id="toc-false-color-image" class="nav-link" data-scroll-target="#false-color-image">False Color Image</a></li>
   <li><a href="#false-color-map" id="toc-false-color-map" class="nav-link" data-scroll-target="#false-color-map">False Color Map</a></li>
+  <li><a href="#land-cover-statistics" id="toc-land-cover-statistics" class="nav-link" data-scroll-target="#land-cover-statistics">Land Cover Statistics</a></li>
   </ul>
 </nav>
     </div>
@@ -203,16 +211,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="text-center">
 <p><img src="pictures/banner.png" class="img-fluid"></p>
 </div>
-<p>False Color Imagery is a visual representation technique to depict data in wavelengths outside the visible spectrum, by assigning visible colors to non-visible wavelengths. This is a common practice in remote sensing to show land features that are not easily discernible to the human eye. Some remote sensing satellites carry equipment to collect data in wavelengths outside the visible spectrum, like Near-Infrared (NIR) and Shortwave Infrared (SWIR). These wavelengths can then be reassigned and visualized to create false color images of the land surface, accentuating features that would otherwise have gone unnoticed.</p>
+<p>False Color Imagery is a visual representation technique to depict data in wavelengths outside the visible spectrum, by assigning visible colors to non-visible wavelengths. This is a common practice in remote sensing to show land features that are not easily discernible to the human eye. Some remote sensing satellites carry equipment to collect data in wavelengths outside the visible spectrum, like Near-Infrared (NIR) and Shortwave Infrared (SWIR). These wavelengths can then be reassigned and visualized to create false color images of the land surface, accentuating features that would otherwise go unnoticed.</p>
 <p>While this sounds tricky, it can be quite simple to code and visualize in programming languages, in this case Python. In this post, we will be using false color imagery to visualize the scar left behind by the Southern California Thomas Fire in December 2017, using data collected from the Landsat satellite.</p>
 <p>The Thomas Fire was the largest wildfire in modern California history, covering an area of ~282,000 acres (1,141 sq km)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The fire started on December 4, 2017, and destroyed more than a thousand structures before it was extinguished on January 12, 2018<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. After burning much of the South Santa Barbara County area, heavy rainfall<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> in January 2018 presented significant risk of mudslides, ultimately resulting in the mudflow in Montecito, California, on January 9, 2018<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <p>The purpose of this post is to act as an example of how to work with shapefiles in conjunction with raster data in Python. We will do simple exploration of the <code>xarray.Dataset</code> called <code>landsat</code>, an raster image of the Santa Barbara County area that contains data for visible, infrared, and near infrared color bands (wavelengths). We will then reassign these color bands to visible colors to generate a false color image, and overlay the boundary of the Thomas Fire.</p>
-<section id="datasets" class="level4">
-<h4 class="anchored" data-anchor-id="datasets">Datasets</h4>
-<p>Landsat Data: The data from Landsat is raster data retrieved from Microsoft’s Planetary Computer. Access it here: https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2</p>
-<p>Fire Perimeters Dataset: This dataset is a shapefile file retrieved from Data.gov of every wildfire in California since 1878. Access it here: https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436</p>
-<p>_</p>
-<p>Let’s get started!</p>
+<p>This false color imagery will also help us calculate statistics on the land cover types affected by the fire, using land cover data from USGS. This analysis is important, as it helps identify which types of land cover were most affected by the Thomas Fire.</p>
+<section id="datasets" class="level3">
+<h3 class="anchored" data-anchor-id="datasets">Datasets</h3>
+<p>Landsat Data<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>: The data from Landsat is a raster image of the Santa Barbara County area, retrieved from Microsoft’s Planetary Computer.</p>
+<p>Fire Perimeters Data<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>: This dataset is a shapefile retrieved from Data.gov, containing geometries for every wildfire in California since 1878.</p>
+<p>LANDFIRE Terrestrial Ecosystems Data<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>: This is a categorical raster of land cover types, with 30x30 meter resolution, collected by the US Geological Survey’s Gap Analysis Program (GAP) in 2011. This data was also retrieved from Microsoft’s Planetary Computer.</p>
 </section>
 <section id="importing-necessary-packages" class="level3">
 <h3 class="anchored" data-anchor-id="importing-necessary-packages">Importing necessary packages:</h3>
@@ -222,7 +230,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gpd</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rioxarray <span class="im">as</span> rioxr</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> shapely <span class="im">import</span> box</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pystac_client</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> planetary_computer</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Image </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fire-data-loading-and-exploration" class="level3">
 <h3 class="anchored" data-anchor-id="fire-data-loading-and-exploration">Fire Data Loading and Exploration</h3>
@@ -257,7 +270,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="text-center">
 <p><img src="pictures/landsatinfo.png" class="img-fluid"></p>
 </div>
-<p>It’s not the most easily digestible data set! So we will do some basic exploration of the data, such as looking at its width, height, and bounding box.</p>
+<p>It’s not the most easily digestible data set! So we will do some basic exploration of the data, such as looking at its width, height, and bounding box. Here, the bounding box is a set of coordinates denoting ‘eastings’ and ‘northings’, or meters from the x-axis reference point in meters (the Prime Meridian) and from the y-axis reference point (the Equator). This set of two coordinates mark two opposite corners of our bounding box.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Height: '</span>, landsat.rio.height)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Width: '</span>, landsat.rio.width)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Bounding Box: '</span>)</span>
@@ -265,8 +278,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="text-center">
 <p><img src="pictures/landsat.shape.png" class="img-fluid"></p>
 </div>
-<p>This data is multidimensional, and cannot be plotted at this point. We can drop the <code>band</code> dimension, which makes the data single dimensional for plotting.</p>
+<p>This data is multidimensional, and cannot be plotted at this point. We can drop the <code>band</code> dimension, which makes the data single dimensional for plotting. Here you can see we have removed the <code>band</code> dimension and dropped its variables.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>landsat <span class="op">=</span> landsat.squeeze().drop_vars(<span class="st">"band"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/landsat_dropband.png" class="img-fluid"></p>
+</div>
 </section>
 <section id="false-color-image" class="level3">
 <h3 class="anchored" data-anchor-id="false-color-image">False Color Image</h3>
@@ -318,6 +334,97 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="pictures/falsecolormap.png" class="img-fluid"></p>
 </div>
 <p>We have now generated a false color map of the Santa Barbara County area, using near and shortwave infrared to emphasize the fire scar left by the Thomas Fire. The boundary of the Thomas Fire has been overlayed to display the exact area affected by the fire. By replacing the red, green, and blue bands with shortwave infrared, near infrared, and red bands (respectively), we can highlight burned areas, vegetation, and bodies of water. Burned areas appear in dark red and brown, as they strongly reflect shortwave infrared but absorb visible light. Living vegetation appears in bright green colors as it strongly reflects near infrared light. This method provides a clearer view of the Thomas Fire’s impact on the landsacape.</p>
+</section>
+<section id="land-cover-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="land-cover-statistics">Land Cover Statistics</h3>
+<p>In order to calculate land cover statistics for the Thomas Fire, we need to load the land cover data for the extent of the fire perimeter. Here we can use a list of coordinates from the <code>thomas_fire</code> shapefile (the eastings and northings I mentioned above) to isolate just the area of the land cover raster that we need. These coordinates need to be in the Coordinate Reference System (CRS) 4326, also known as EPSG:4326 or WGS84, as this is the CRS of the land cover data.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>thomas_fire_bbox <span class="op">=</span> <span class="bu">list</span>(thomas_fire.to_crs(<span class="st">'epsg:4326'</span>).total_bounds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we can import the land cover labels from the CSV file included with the GAP data. This CSV contains labels for every land cover type in the country, and so there are many that are irrelevant to this analysis, as seen when viewing the data head. Notice that there is a NULL value (0), which is used for areas outside the areas of interest (oceans).</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> pd.read_csv(os.path.join(root, <span class="st">'GAP_National_Terrestrial_Ecosystems.csv'</span>))</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>labels.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/labelshead.png" class="img-fluid"></p>
+</div>
+<p>Next, we connect to the Microsoft Planetary Computer data catalog and perform a search to find our land cover data. The collection ID for the data is <code>gap</code>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>catalog <span class="op">=</span> pystac_client.Client.<span class="bu">open</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://planetarycomputer.microsoft.com/api/stac/v1"</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    modifier<span class="op">=</span>planetary_computer.sign_inplace,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>search <span class="op">=</span> catalog.search(collections <span class="op">=</span> [<span class="st">'gap'</span>],</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                        bbox <span class="op">=</span> thomas_fire_bbox)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>search</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/gapsearch.png" class="img-fluid"></p>
+</div>
+<p>This is what we get after our search. Now have to take another step to retrieve the item from the search.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>items <span class="op">=</span> search.item_collection()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Returned </span><span class="sc">{</span><span class="bu">len</span>(items)<span class="sc">}</span><span class="ss"> Items"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>items</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/searchitem.png" class="img-fluid"></p>
+</div>
+<p>There is a single item in the search, so let’s go ahead and select it and view its pre-rendered image. First we select the item, and then display the pre-rendered image:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>item <span class="op">=</span> items[<span class="dv">0</span>]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Image(url <span class="op">=</span> item.assets[<span class="st">'rendered_preview'</span>].href, width <span class="op">=</span> <span class="dv">600</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/prerender.png" class="img-fluid"></p>
+</div>
+<p>Cool!</p>
+<p>Now we can open the <code>xarray.DataArray</code> from our search:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lulc <span class="op">=</span> rioxr.open_rasterio(item.assets[<span class="st">'data'</span>].href)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lulc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/GAPxarray.png" class="img-fluid"></p>
+</div>
+<p>At this point, our <code>lulc</code> <code>xarray.DataArray</code> is multidimensional. We’ll drop the <code>band</code> dimension and its variables, just as we did before:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lulc <span class="op">=</span> lulc.squeeze().drop_vars(<span class="st">'band'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To ensure proper mapping, we will ensure that the Thomas Fire perimeter shapefile is the same CRS as that of the land cover data. Use <code>assert</code> to run a quick test to ensure that the code worked properly.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Match CRSs and verify update</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>thomas_fire_match <span class="op">=</span> thomas_fire.to_crs(lulc.rio.crs)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> thomas_fire_match.crs <span class="op">==</span> lulc.rio.crs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we can make our first plot of the land cover data, clipped to the size of the Thomas Fire perimeter shapefile, using the <code>total_bounds</code> of <code>thomas_fire</code>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>lulc <span class="op">=</span> lulc.rio.write_nodata(<span class="dv">0</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>lulc_clip <span class="op">=</span> (lulc.rio.clip_box(<span class="op">*</span>thomas_fire_match.total_bounds)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>              .rio.clip(thomas_fire_match.geometry))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>lulc_clip.plot()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/thomasfireplot2.png" class="img-fluid"></p>
+</div>
+<p>Now that the land cover types within the Thomas Fire boundary are isolated, we can begin calculating land cover class statistics. The first line finds the counts of unique values in the <code>lulc_clip</code> <code>xarray.DataArray</code>. The second line assembles these counts into a dataframe called <code>pix_counts</code>. The third line merges <code>pix_counts</code> with the <code>labels</code> dataframe we loaded earlier, as well as removes any row where the code is NULL.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>values, counts <span class="op">=</span> np.unique(lulc_clip, return_counts <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pix_counts <span class="op">=</span> pd.DataFrame({<span class="st">'code'</span>: values, <span class="st">'count'</span>: counts})</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> pix_counts[pix_counts[<span class="st">'code'</span>] <span class="op">!=</span> <span class="dv">0</span>].merge(labels, on<span class="op">=</span><span class="st">'code'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, we find the total pixels included in the Thomas Fire perimeter, simply by adding them up. We can then find the percentage of pixels with a certain land cover class. Finally, we remove any statistically insignificant land cover classes (&gt;1.5% coverage).</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>total_pixels <span class="op">=</span> <span class="bu">sum</span>(classes[<span class="st">'count'</span>])</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>classes[<span class="st">'percentage'</span>] <span class="op">=</span> (classes[<span class="st">'count'</span>] <span class="op">/</span> total_pixels) <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> classes[classes[<span class="st">'percentage'</span>] <span class="op">&gt;=</span> <span class="fl">1.5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now that we have wrangled our data, we can plot it to visualize statistics on land cover classes affecrted by the Thomas Fire.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> classes.sort_values(by<span class="op">=</span><span class="st">'percentage'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.barh(classes[<span class="st">'class_label'</span>], classes[<span class="st">'percentage'</span>], color<span class="op">=</span><span class="st">'skyblue'</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Percentage'</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Land Cover Classes Affected by Thomas Fire'</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>plt.grid(axis<span class="op">=</span><span class="st">'x'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="text-center">
+<p><img src="pictures/landcovergraph.png" class="img-fluid"></p>
+</div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -331,6 +438,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li id="fn3"><p>https://www.dailynews.com/2018/01/10/rain-is-done-how-much-did-we-get/<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>https://www.latimes.com/local/lanow/la-me-ln-mudslide-recovery-mainbar-20180111-story.html<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn5"><p>Banner image sourced from: https://earthobservatory.nasa.gov/images/91379/smoke-and-fire-in-southern-california<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>https://www.sciencebase.gov/catalog/item/573cc51be4b0dae0d5e4b0c5<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
