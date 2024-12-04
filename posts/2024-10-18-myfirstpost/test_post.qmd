@@ -6,39 +6,20 @@ author:
     url: https://ryangreen6.github.io/
     affiliation: MEDS
     affiliation-url:  https://bren.ucsb.edu/masters-programs/master-environmental-data-science
-date: 2024-10-18
+date: 55000 BC-04-22
 categories: [Quarto, MEDS]
 toc: true
 image: crop_caveman.png
-
 ---
-
 
 ## This is my first section!
 
 Let's put some text in here [^1]
 
+[^1]: Footnote?
 
 ## Nice, this is my second section
 
 Another footnote? [^2]
 
-
-
-
-
-
-[^1]: Footnote?
 [^2]: Yeah of course
-
-
-
-
-
-
-
-
-
-
-
-
