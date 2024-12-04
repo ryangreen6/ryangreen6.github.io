@@ -12,7 +12,7 @@ website:
 #      - href: resources.qmd
       - text: Resume
       - href: posts.qmd
-        text: Blog
+        text: 
   page-footer: 
     background: light
     left: Copyright 2024, Ryan Green
