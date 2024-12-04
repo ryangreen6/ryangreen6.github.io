@@ -1,9 +1,9 @@
 ---
 title: "Thomas Fire False Color Analysis"
-description: " "
+description: "Mapping the Thomas Fire and Calculating Land Cover Statisics Using False Color Imagery"
 author: 
   - name: Ryan Green
-    url: https://ryangreen6.github.io/
+    url: 
 date: 2024-12-07
 execute:
   warning: false
@@ -36,19 +36,20 @@ The Thomas Fire was the largest wildfire in modern California history, covering 
 
 The purpose of this post is to act as an example of how to work with shapefiles in conjunction with raster data in Python. We will do simple exploration of the `xarray.Dataset` called `landsat`, an raster image of the Santa Barbara County area that contains data for visible, infrared, and near infrared color bands (wavelengths). We will then reassign these color bands to visible colors to generate a false color image, and overlay the boundary of the Thomas Fire.
 
-#### Datasets
+This false color imagery will also help us calculate statistics on the land cover types affected by the fire, using land cover data from USGS. This analysis is important, as it helps identify which types of land cover were most affected by the Thomas Fire. 
 
-Landsat Data: The data from Landsat is raster data retrieved from Microsoft's Planetary Computer. Access it here: https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2
+### Datasets
 
-Fire Perimeters Dataset: This dataset is a shapefile file retrieved from Data.gov of every wildfire in California since 1878. Access it here: https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436
+Landsat Data[^6]: The data from Landsat is a raster image of the Santa Barbara County area, retrieved from Microsoft's Planetary Computer.
 
-\_
+Fire Perimeters Data[^7]: This dataset is a shapefile retrieved from Data.gov, containing geometries for every wildfire in California since 1878.
 
-Let's get started!
+LANDFIRE Terrestrial Ecosystems Data[^8]: This is a categorical raster of land cover types, with 30x30 meter resolution, collected by the US Geological Survey's Gap Analysis Program (GAP) in 2011. This data was also retrieved from Microsoft's Planetary Computer. 
+
 
 ### Importing necessary packages:
 
-``` python
+```python
 import os
 import numpy as np
 import pandas as pd
@@ -56,13 +57,18 @@ import geopandas as gpd
 import xarray as xr
 import rioxarray as rioxr
 import matplotlib.pyplot as plt
+
+from shapely import box
+import pystac_client
+import planetary_computer
+from IPython.display import Image 
 ```
 
 ### Fire Data Loading and Exploration
 
 The fire perimeter data set is huge, containing more than 20,000 fires. In this code, we have loaded and narrowed down the data set to just the 2017 Thomas Fire, and created a new shapefile for its perimeter. This way we can save some time when running the code, as we won't have to load the entire dataset, only the data we need.
 
-``` python
+```python
 fires = gpd.read_file("fire_perimeters/California_Fire_Perimeters_(all).shp")
 
 thomas_fire = fires[(fires['FIRE_NAME'] == 'THOMAS') & (fires['YEAR_'] == 2017)]
@@ -70,7 +76,7 @@ thomas_fire = fires[(fires['FIRE_NAME'] == 'THOMAS') & (fires['YEAR_'] == 2017)]
 thomas_fire.to_file("data/thomas_fire.shp")
 ```
 
-``` python
+```python
 print(thomas_fire.shape)
 print(thomas_fire.dtypes)
 ```
@@ -81,7 +87,7 @@ print(thomas_fire.dtypes)
 
 Now we can make our first basic visualization of the Thomas Fire perimeter.
 
-``` python
+```python
 thomas_fire.plot()
 ```
 
@@ -91,7 +97,7 @@ thomas_fire.plot()
 
 Notice the polygon is filled in; since we only want the perimeter, we can simply use `.boundary` while plotting.
 
-``` python
+```python
 thomas_fire.boundary.plot()
 ```
 
@@ -103,7 +109,7 @@ thomas_fire.boundary.plot()
 
 To properly open the Landsat data, we can use a function out of the package we loaded earlier, `rioxarray`. This package is loaded as `rioxr`, and integrates the packages `rasterio` (used for loading raster data), and `xarray`, which handles multidimensional arrays like time series, or in this case, multi-band imagery. We will also take a look at the head of the `xarray.Dataset` to see what it looks like.
 
-``` python
+```python
 fp = os.path.join("/example/path/to/your/data", "landsat8-2018-01-26-sb-simplified.nc")
 landsat = rioxr.open_rasterio(fp)
 landsat.head()
@@ -113,9 +119,9 @@ landsat.head()
 ![](pictures/landsatinfo.png)
 :::
 
-It's not the most easily digestible data set! So we will do some basic exploration of the data, such as looking at its width, height, and bounding box.
+It's not the most easily digestible data set! So we will do some basic exploration of the data, such as looking at its width, height, and bounding box. Here, the bounding box is a set of coordinates denoting 'eastings' and 'northings', or meters from the x-axis reference point in meters (the Prime Meridian) and from the y-axis reference point (the Equator). This set of two coordinates mark two opposite corners of our bounding box. 
 
-``` python
+```python
 print('Height: ', landsat.rio.height)
 print('Width: ', landsat.rio.width)
 print('Bounding Box: ')
@@ -126,17 +132,21 @@ print(landsat.rio.bounds(), '\n')
 ![](pictures/landsat.shape.png)
 :::
 
-This data is multidimensional, and cannot be plotted at this point. We can drop the `band` dimension, which makes the data single dimensional for plotting.
+This data is multidimensional, and cannot be plotted at this point. We can drop the `band` dimension, which makes the data single dimensional for plotting. Here you can see we have removed the `band` dimension and dropped its variables. 
 
-``` python
+```python
 landsat = landsat.squeeze().drop_vars("band")
 ```
+
+::: text-center
+![](pictures/landsat_dropband.png)
+:::
 
 ### False Color Image
 
 Now we can try our first visualization of the Landsat data. This is where we can arrange color bands for our visualization, but for now we will arrange them in their proper places to produce a true color image. It is important to add the argument `robust = True`, as this excludes outlying colors that create noise and distort our true color image.
 
-``` python
+```python
 landsat[['red', 'green', 'blue']].to_array().plot.imshow(robust = True)
 ```
 
@@ -146,7 +156,7 @@ landsat[['red', 'green', 'blue']].to_array().plot.imshow(robust = True)
 
 We can arrange color bands however we like! For this false color image, we are replacing the red band with shortwave infrared (SWIR), the green band with near infrared (NIR), and the blue band with red.
 
-``` python
+```python
 landsat[['swir22', 'nir08', 'red']].to_array().plot.imshow(robust = True)
 ```
 
@@ -158,19 +168,19 @@ landsat[['swir22', 'nir08', 'red']].to_array().plot.imshow(robust = True)
 
 Before we make a map out of the false color image, we need to make sure that the Thomas Fire perimeter shapefile is compatible with it. We can adjust the CRS of the shapefile to match that of the Landsat data.
 
-``` python
+```python
 thomas_fire = thomas_fire.to_crs(landsat.rio.crs)
 ```
 
 We will also establish an aspect ratio for out map, based on the Landsat data.
 
-``` python
+```python
 landsat_aspect_ratio = landsat.rio.width / landsat.rio.height
 ```
 
 And now we can create our map!
 
-``` python
+```python
 fig, ax = plt.subplots(figsize= (10, 6*landsat_aspect_ratio))
 
 ax.axis('off')
@@ -205,9 +215,156 @@ plt.show()
 
 We have now generated a false color map of the Santa Barbara County area, using near and shortwave infrared to emphasize the fire scar left by the Thomas Fire. The boundary of the Thomas Fire has been overlayed to display the exact area affected by the fire. By replacing the red, green, and blue bands with shortwave infrared, near infrared, and red bands (respectively), we can highlight burned areas, vegetation, and bodies of water. Burned areas appear in dark red and brown, as they strongly reflect shortwave infrared but absorb visible light. Living vegetation appears in bright green colors as it strongly reflects near infrared light. This method provides a clearer view of the Thomas Fire's impact on the landsacape.
 
+### Land Cover Statistics
+
+In order to calculate land cover statistics for the Thomas Fire, we need to load the land cover data for the extent of the fire perimeter. Here we can use a list of coordinates from the `thomas_fire` shapefile (the eastings and northings I mentioned above) to isolate just the area of the land cover raster that we need. These coordinates need to be in the Coordinate Reference System (CRS) 4326, also known as EPSG:4326 or WGS84, as this is the CRS of the land cover data. 
+
+```python
+thomas_fire_bbox = list(thomas_fire.to_crs('epsg:4326').total_bounds)
+```
+
+Now we can import the land cover labels from the CSV file included with the GAP data. This CSV contains labels for every land cover type in the country, and so there are many that are irrelevant to this analysis, as seen when viewing the data head. Notice that there is a NULL value (0), which is used for areas outside the areas of interest (oceans). 
+
+```python
+labels = pd.read_csv(os.path.join(root, 'GAP_National_Terrestrial_Ecosystems.csv'))
+labels.head()
+```
+
+::: text-center
+![](pictures/labelshead.png)
+:::
+
+Next, we connect to the Microsoft Planetary Computer data catalog and perform a search to find our land cover data. The collection ID for the data is `gap`:
+
+```python
+catalog = pystac_client.Client.open(
+    "https://planetarycomputer.microsoft.com/api/stac/v1",
+    modifier=planetary_computer.sign_inplace,
+)
+
+search = catalog.search(collections = ['gap'],
+                        bbox = thomas_fire_bbox)
+search
+```
+
+::: text-center
+![](pictures/gapsearch.png)
+:::
+
+This is what we get after our search. Now have to take another step to retrieve the item from the search. 
+
+```python
+items = search.item_collection()
+print(f"Returned {len(items)} Items")
+items
+```
+
+::: text-center
+![](pictures/searchitem.png)
+:::
+
+
+There is a single item in the search, so let's go ahead and select it and view its pre-rendered image. First we select the item, and then display the pre-rendered image:
+
+```python
+item = items[0]
+
+Image(url = item.assets['rendered_preview'].href, width = 600)
+```
+
+::: text-center
+![](pictures/prerender.png)
+:::
+
+Cool! 
 
 
 
+Now we can open the `xarray.DataArray` from our search:
+
+```python
+lulc = rioxr.open_rasterio(item.assets['data'].href)
+lulc
+```
+
+::: text-center
+![](pictures/GAPxarray.png)
+:::
+
+At this point, our `lulc` `xarray.DataArray` is multidimensional. We'll drop the `band` dimension and its variables, just as we did before:
+
+```python
+lulc = lulc.squeeze().drop_vars('band')
+```
+
+To ensure proper mapping, we will ensure that the Thomas Fire perimeter shapefile is the same CRS as that of the land cover data. Use `assert` to run a quick test to ensure that the code worked properly. 
+
+```python
+# Match CRSs and verify update
+thomas_fire_match = thomas_fire.to_crs(lulc.rio.crs)
+assert thomas_fire_match.crs == lulc.rio.crs
+```
+
+Now we can make our first plot of the land cover data, clipped to the size of the Thomas Fire perimeter shapefile, using the `total_bounds` of `thomas_fire`. 
+
+```python
+lulc = lulc.rio.write_nodata(0)
+
+lulc_clip = (lulc.rio.clip_box(*thomas_fire_match.total_bounds)
+              .rio.clip(thomas_fire_match.geometry))
+
+lulc_clip.plot()
+```
+
+::: text-center
+![](pictures/thomasfireplot2.png)
+:::
+
+Now that the land cover types within the Thomas Fire boundary are isolated, we can begin calculating land cover class statistics. 
+The first line finds the counts of unique values in the `lulc_clip` `xarray.DataArray`.
+The second line assembles these counts into a dataframe called `pix_counts`. 
+The third line merges `pix_counts` with the `labels` dataframe we loaded earlier, as well as removes any row where the code is NULL. 
+
+```python
+values, counts = np.unique(lulc_clip, return_counts = True)
+
+pix_counts = pd.DataFrame({'code': values, 'count': counts})
+
+classes = pix_counts[pix_counts['code'] != 0].merge(labels, on='code')
+```
+
+Next, we find the total pixels included in the Thomas Fire perimeter, simply by adding them up. We can then find the percentage of pixels with a certain land cover class. Finally, we remove any statistically insignificant land cover classes (>1.5% coverage). 
+
+
+```python
+total_pixels = sum(classes['count'])
+
+classes['percentage'] = (classes['count'] / total_pixels) * 100
+
+classes = classes[classes['percentage'] >= 1.5]
+
+```
+
+Now that we have wrangled our data, we can plot it to visualize statistics on land cover classes affecrted by the Thomas Fire.
+
+```python
+classes = classes.sort_values(by='percentage', ascending=True)
+
+plt.figure(figsize=(8, 5))
+plt.barh(classes['class_label'], classes['percentage'], color='skyblue')
+
+plt.xlabel('Percentage', fontsize=12)
+plt.title('Land Cover Classes Affected by Thomas Fire', fontsize=14)
+plt.xticks(rotation=45)
+plt.grid(axis='x', linestyle='--', alpha=0.7)
+
+plt.tight_layout()
+plt.show()
+```
+
+::: text-center
+![](pictures/landcovergraph.png)
+:::
 
 
 
@@ -222,4 +379,8 @@ We have now generated a false color map of the Santa Barbara County area, using 
 
 [^5]: Banner image sourced from: https://earthobservatory.nasa.gov/images/91379/smoke-and-fire-in-southern-california
 
+[^6]: https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2
 
+[^7]: https://catalog.data.gov/dataset/california-fire-perimeters-all-b3436
+
+[^8]: https://www.sciencebase.gov/catalog/item/573cc51be4b0dae0d5e4b0c5
