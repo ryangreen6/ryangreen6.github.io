@@ -3,23 +3,13 @@ title: "Test Post"
 description: "Learning How to Make Blog Posts"
 author: 
   - name: Ryan Green
-    url: https://ryangreen6.github.io/
+    url: 
     affiliation: MEDS
-    affiliation-url:  https://bren.ucsb.edu/masters-programs/master-environmental-data-science
-date: 55000 BC-04-22
+    affiliation-url:  
+date: 0000-04-22
 categories: [Quarto, MEDS]
 toc: true
 image: crop_caveman.png
 ---
 
-## This is my first section!
-
-Let's put some text in here [^1]
-
-[^1]: Footnote?
-
-## Nice, this is my second section
-
-Another footnote? [^2]
-
-[^2]: Yeah of course
+Test Post!
