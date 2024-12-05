@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ryan Green">
-<meta name="dcterms.date" content="2024-12-07">
+<meta name="dcterms.date" content="2024-12-04">
 <meta name="description" content="Mapping the Thomas Fire and Calculating Land Cover Statisics Using False Color Imagery">
 
 <title>Thomas Fire False Color Analysis – Ryan Green</title>
@@ -175,7 +175,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">December 7, 2024</p>
+        <p class="date">December 4, 2024</p>
       </div>
     </div>
     
@@ -278,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="text-center">
 <p><img src="pictures/landsat.shape.png" class="img-fluid"></p>
 </div>
-<p>This data is multidimensional, and cannot be plotted at this point. We can drop the <code>band</code> dimension, which makes the data single dimensional for plotting. Here you can see we have removed the <code>band</code> dimension and dropped its variables.</p>
+<p>This data is multidimensional, and cannot be plotted at this point. We can drop the <code>band</code> dimension, which makes the data two dimensional for plotting. Here you can see we have removed the <code>band</code> dimension and dropped its variables.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>landsat <span class="op">=</span> landsat.squeeze().drop_vars(<span class="st">"band"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="text-center">
 <p><img src="pictures/landsat_dropband.png" class="img-fluid"></p>
@@ -378,7 +378,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="text-center">
 <p><img src="pictures/GAPxarray.png" class="img-fluid"></p>
 </div>
-<p>At this point, our <code>landcover</code> <code>xarray.DataArray</code> is multidimensional. We’ll drop the <code>band</code> dimension and its variables, just as we did before:</p>
+<p>At this point, our <code>landcover</code> <code>xarray.DataArray</code> is three dimensional. We’ll drop the <code>band</code> dimension and its variables, just as we did before:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>landcover <span class="op">=</span> landcover.squeeze().drop_vars(<span class="st">'band'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To ensure proper mapping, we will ensure that the Thomas Fire perimeter shapefile is the same CRS as that of the land cover data. Use <code>assert</code> to run a quick test to ensure that the code worked properly.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Match CRSs and verify update</span></span>
@@ -400,13 +400,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>pix_counts <span class="op">=</span> pd.DataFrame({<span class="st">'code'</span>: values, <span class="st">'count'</span>: counts})</span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> pix_counts[pix_counts[<span class="st">'code'</span>] <span class="op">!=</span> <span class="dv">0</span>].merge(labels, on<span class="op">=</span><span class="st">'code'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Next, we find the total pixels included in the Thomas Fire perimeter, simply by adding them up. We can then find the percentage of pixels with a certain land cover class. Finally, we remove any statistically insignificant land cover classes (&gt;1.5% coverage).</p>
+<p>Next, we find the total pixels included in the Thomas Fire perimeter, simply by adding them up. We can then find the percentage of pixels with a certain land cover class. Finally, we remove any statistically insignificant land cover classes (&lt;1.5% coverage).</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>total_pixels <span class="op">=</span> <span class="bu">sum</span>(classes[<span class="st">'count'</span>])</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>classes[<span class="st">'percentage'</span>] <span class="op">=</span> (classes[<span class="st">'count'</span>] <span class="op">/</span> total_pixels) <span class="op">*</span> <span class="dv">100</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> classes[classes[<span class="st">'percentage'</span>] <span class="op">&gt;=</span> <span class="fl">1.5</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now that we have wrangled our data, we can plot it to visualize statistics on land cover classes affecrted by the Thomas Fire.</p>
+<p>Now that we have wrangled our data, we can plot it to visualize statistics on land cover classes affected by the Thomas Fire.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>classes <span class="op">=</span> classes.sort_values(by<span class="op">=</span><span class="st">'percentage'</span>, ascending<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">5</span>))</span>
