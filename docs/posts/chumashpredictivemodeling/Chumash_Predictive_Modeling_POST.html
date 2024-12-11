@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -200,7 +234,15 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>My goal in this analysis was to create a model based on the available site data at Point Conception, and apply it to the greater Santa Barbara area (the known range of the Barbareño). For this model, the chosen predictors were topography and access to water. The Chumash were not an agricultural people, and so soil type was not selected as a possible predictor. Vegetation cover in the Santa Barbara area has stayed fairly consistent in the last few thousand years, and so this was not a useful predictor either<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <p>All calculations for this study were done entirely in R. To conduct this study, and to compensate for lack of actual site data, I generated 2,000 points across the Point Conception area and created the binary variable ‘presence’ to categorize actual sites and generated points. I then extracted elevations and calculated distances for each point to the nearest water source, based on data obtained from USGS of creeks and elevations in the Santa Barbara area.</p>
-<p>I then made a logistic regression model, with the dependent variable ‘presence’, and the predictors elevation and water_proximity. This logistic regression estimates the relationship between these predictors and the likelihood of a site being present (presence = 1), using a log-odds transformation to relate the probabilities to the predictors.The square root transformation on water_proximity is used to reduce the impact of outliers and to linearize the relationship between this predictor and the log-odds of presence.</p>
+<p>I then made a logistic regression model, with the dependent variable ‘presence’, and the predictors elevation and water_proximity. This logistic regression estimates the relationship between these predictors and the likelihood of a site being present (presence = 1), using a log-odds transformation to relate the probabilities to the predictors. A square root transformation on water_proximity was used to reduce the impact of outliers and to linearize the relationship between this predictor and the log-odds of presence.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logit_mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> elevation_m <span class="sc">+</span> <span class="fu">sqrt</span>(water_proximity), </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> all_sites, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The residuals (differences between observed and predicted values) for all points from the fitted model were then extracted and added as a column to the sites data frame, before being converted to a spatial feature object. A spatial neighborhood structure was created using the <code>dnearneigh</code> function in the package <code>spdep</code>, defining neighbors as points within 50 meters of each other. This was then used to create a spatial weights matrix using the function <code>nb2listw</code>, also in the <code>spdep</code> package, assigning weights to the relationships between points based on proximity. Then, spatial lag was calculated for the elevation variable using the <code>spdep</code> function <code>lag.listw</code>, representing a weighted average of elevation values of neighboring points<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<p>A new logistic regression model was then fitted, including <code>elevation_m</code>, the square root of <code>water_proximity</code>, and the spatially lagged elevation_m (<code>lag_elevation</code>) as predictors. The inclusion of the spatial lag variable accounts for spatial autocorrelation, helping the model to better explain variations in site presence.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logit_mod_spatial <span class="ot">&lt;-</span> <span class="fu">glm</span>(presence <span class="sc">~</span> elevation_m <span class="sc">+</span> <span class="fu">sqrt</span>(water_proximity) <span class="sc">+</span> lag_elevation, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">data =</span> all_sites, </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">family =</span> binomial)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
@@ -213,8 +255,6 @@ ul.task-list li input[type="checkbox"] {
 </figure>
 </div>
 </div>
-<p>The residuals (differences between observed and predicted values) for all points from the fitted model were then extracted and added as a column to the sites data frame, before being converted to a spatial feature object. A spatial neighborhood structure was created using the <code>dnearneigh</code> function in the package <code>spdep</code>, defining neighbors as points within 50 meters of each other. This was then used to create a spatial weights matrix using the function <code>nb2listw</code>, also in the <code>spdep</code> package, assigning weights to the relationships between points based on proximity. Then, spatial lag was calculated for the elevation variable using the <code>spdep</code> function <code>lag.listw</code>, representing a weighted average of elevation values of neighboring points<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
-<p>A new logistic regression model was then fitted, including <code>elevation_m</code>, the square root of <code>water_proximity</code>, and the spatially lagged elevation_m (<code>lag_elevation</code>) as predictors. The inclusion of the spatial lag variable accounts for spatial autocorrelation, helping the model to better explain variations in site presence.</p>
 <p>Predicted probabilities of presence were then calculated for all points in the data set, using the new spatial model. This data was once again converted to a spatial feature object and mapped according to each points’ predicted probability.</p>
 <div class="text-center">
 <div class="quarto-figure quarto-figure-center">
