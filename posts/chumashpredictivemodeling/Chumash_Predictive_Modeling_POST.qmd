@@ -1,6 +1,6 @@
 ---
 title: "Chumash Predictive Modeling"
-subtitle: "Using Archaeological Predictive Modeling (APM) to Predict Locations of Chumash Cultural Sites"
+description: "Using Archaeological Predictive Modeling (APM) to Predict Locations of Chumash Cultural Sites"
 author: "Ryan Green"
 date: 12/10/24
 execute:
