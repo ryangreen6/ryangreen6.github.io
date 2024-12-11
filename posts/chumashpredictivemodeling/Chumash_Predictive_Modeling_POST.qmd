@@ -25,7 +25,7 @@ editor_options:
 
 ## Introduction
 
-Archaeological sites are traditionally found by identifying material on the surface, by some historic context (oral or written), or plainly by chance. This analysis aims to use Archaeological Predictive Modeling to calculate possible site locations using the information of known sites.
+Archaeological sites are traditionally found by identifying material on the surface, by some historic context, or plainly by chance. This analysis aims to use Archaeological Predictive Modeling to calculate possible site locations using the information of known sites.
 
 Archaeological Predictive Modeling (APM) was first conceptualized by Kohler and Parker (1986)[^1] and Judge and Sebastian (1988)[^2]. This technique uses logistic regression and identifies factors like vegetation cover, soil type, topography, and water access to identify areas for investigation. In short, APM seeks to discover to what degree environmental factors influence human behavior, and whether or not these settlement patterns can be used to identify areas of archaeological interest. In modern archaeology, APM has become an essential for the quantitative assessment of archaeological site presence, and assists with preliminary planning for archaeological surveys.
 
