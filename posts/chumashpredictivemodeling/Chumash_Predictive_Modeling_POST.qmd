@@ -1,8 +1,10 @@
 ---
-title: "Chumash Predictive Modeling"
+title: "Archaeological Predictive Modeling"
 description: "Using Archaeological Predictive Modeling (APM) to Predict Locations of Chumash Cultural Sites"
-author: "Ryan Green"
-date: 12/10/24
+author: 
+  - name: Ryan Green
+    url: 
+date: 12/10/2024
 execute:
   warning: false
   message: false
@@ -18,6 +20,7 @@ image: pictures/chumash-rock-art-pictograph-santa-ynez-mountains-santa-barbara.j
 editor_options: 
   chunk_output_type: console
 ---
+
 
 ::: text-center
 ![Excavations on Mescalitan Island, now the Santa Barbara Airport, 1920's. From the Santa Barbara Independent](pictures/Van-Valkenburgh-Mescalitan-Island-1.jpg)
