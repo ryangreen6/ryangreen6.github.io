@@ -15,7 +15,6 @@ about:
       target: _blank
     - text: Email
       href: mailto:ryangreen@ucsb.edu
-
 ---
 
 Ryan Green is pursuing a master's degree in Environmental Data Science to align his career with his passion for geography and spatial data. Ryan has a BA in Geography and Archaeology from Sonoma State University after finding love for these subjects at an early age.
