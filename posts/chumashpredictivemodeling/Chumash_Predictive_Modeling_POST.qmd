@@ -30,7 +30,7 @@ editor_options:
 
 Archaeological sites are traditionally found by identifying material on the surface, by some historic context, or plainly by chance. This analysis aims to use Archaeological Predictive Modeling to calculate possible site locations using the information of known sites.
 
-Archaeological Predictive Modeling (APM) was first conceptualized by Kohler and Parker (1986)[^1] and Judge and Sebastian (1988)[^2]. This technique uses logistic regression and identifies factors like vegetation cover, soil type, topography, and water access to identify areas for investigation. In short, APM seeks to discover to what degree environmental factors influence human behavior, and whether or not these settlement patterns can be used to identify areas of archaeological interest. In modern archaeology, APM has become an essential for the quantitative assessment of archaeological site presence, and assists with preliminary planning for archaeological surveys.
+Archaeological Predictive Modeling (APM) was first conceptualized by Kohler and Parker (1986)[^1] and Judge and Sebastian (1988)[^2]. This technique uses logistic regression and identifies factors like vegetation cover, soil type, topography, and water access to identify areas for investigation. In short, APM seeks to discover to what degree environmental factors influence human behavior, and whether or not these settlement patterns can be used to identify areas of archaeological interest. In modern archaeology, APM has become essential for the quantitative assessment of archaeological site presence, and assists with preliminary planning for archaeological surveys.
 
 [^1]: Kohler, T. A., & Parker, S. C. (1986). Predictive models for archaeological resource location. In M. B. Schiffer (Ed.), Advances in Archaeological Method and Theory (pp. 397–452). Academic Press. https://doi.org/10.1016/B978-0-12-003109-2.50011-8
 
@@ -42,7 +42,7 @@ In this analysis I focused on the Barbareño Chumash, the Chumash tribe that occ
 
 ## Predictive Model
 
-The site data was sourced from an archaeological survey by Rick et al. (2022)[^4] of Chumash sites at Point Conception, CA. I chose to use only sites that predated the Mission period for this analysis, to identify only sites that are purely Chumash.
+The site data was sourced from an archaeological survey by Rick et al. (2022)[^4] of Chumash sites at Point Conception, CA. While this study identifies many sites before and after the Mission period, I chose to use only sites that predated the Mission period for this analysis, to identify only sites that are purely Chumash.
 
 [^4]: Rick, T. C., Braje, T. J., Graham, L., et al. (2022). Cultural keystone places and the Chumash landscapes of Kumqaq’, Point Conception, California. American Antiquity, 87(3), 487–504. https://doi.org/10.1017/aaq.2021.154
 
@@ -50,7 +50,7 @@ The site data was sourced from an archaeological survey by Rick et al. (2022)[^4
 ![Site locations at Point Conception](pictures/pc_sites_new.png)
 :::
 
-My goal in this analysis was to create a model based on the available site data at Point Conception, and apply it to the greater Santa Barbara area (the known range of the Barbareño). For this model, the chosen predictors were topography and access to water. The Chumash were not an agricultural people, and so soil type was irrelevant. Vegetation cover in the Santa Barbara area has stayed fairly consistent in the last few thousand years, and so this was not a useful predictor either[^5].
+My goal in this analysis was to create a model based on the available site data at Point Conception, and apply it to the greater Santa Barbara area (the known range of the Barbareño). For this model, the chosen predictors were topography and access to water. The Chumash were not an agricultural people, and so soil type was not selected as a possible predictor. Vegetation cover in the Santa Barbara area has stayed fairly consistent in the last few thousand years, and so this was not a useful predictor either[^5].
 
 [^5]: Modugno, T. (2022). Dos Pueblos Chumash. Retrieved from https://goletahistory.com/dos-pueblos-chumash/
 
