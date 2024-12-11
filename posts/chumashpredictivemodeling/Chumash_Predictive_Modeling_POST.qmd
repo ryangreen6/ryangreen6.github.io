@@ -56,21 +56,34 @@ My goal in this analysis was to create a model based on the available site data 
 
 All calculations for this study were done entirely in R. To conduct this study, and to compensate for lack of actual site data, I generated 2,000 points across the Point Conception area and created the binary variable ‘presence’ to categorize actual sites and generated points. I then extracted elevations and calculated distances for each point to the nearest water source, based on data obtained from USGS of creeks and elevations in the Santa Barbara area.
 
-I then made a logistic regression model, with the dependent variable ‘presence’, and the predictors elevation and water_proximity. This logistic regression estimates the relationship between these predictors and the likelihood of a site being present (presence = 1), using a log-odds transformation to relate the probabilities to the predictors.The square root transformation on water_proximity is used to reduce the impact of outliers and to linearize the relationship between this predictor and the log-odds of presence.
+I then made a logistic regression model, with the dependent variable ‘presence’, and the predictors elevation and water_proximity. This logistic regression estimates the relationship between these predictors and the likelihood of a site being present (presence = 1), using a log-odds transformation to relate the probabilities to the predictors. A square root transformation on water_proximity was used to reduce the impact of outliers and to linearize the relationship between this predictor and the log-odds of presence.
 
-## Results
-
-The coefficients of this model showed a negative correlation between elevation and site presence, with a coefficient of -0.02, indicating that with every meter of elevation gain, the log-odds of site presence decreases by 0.02. With a p-value of \<0.001, this is highly significant. It also showed that distance to water sources were statistically insignificant, with a coefficient of 0.0055, and a p-value of 0.894. This could possibly be due to the high number of creeks in the relatively small study area at Point Conception. Both these results are likely results of spatial autocorrelation.
-
-::: text-center
-![Probability of site presence vs. Elevation, the strongest predictor](pictures/elev_prox.png)
-:::
-
+```r
+logit_mod <- glm(presence ~ elevation_m + sqrt(water_proximity), 
+                 data = all_sites, 
+                 family = binomial)
+```
 The residuals (differences between observed and predicted values) for all points from the fitted model were then extracted and added as a column to the sites data frame, before being converted to a spatial feature object. A spatial neighborhood structure was created using the `dnearneigh` function in the package `spdep`, defining neighbors as points within 50 meters of each other. This was then used to create a spatial weights matrix using the function `nb2listw`, also in the `spdep` package, assigning weights to the relationships between points based on proximity. Then, spatial lag was calculated for the elevation variable using the `spdep` function `lag.listw`, representing a weighted average of elevation values of neighboring points[^6].
 
 [^6]: https://www.rdocumentation.org/packages/spdep/versions/1.3-8
 
 A new logistic regression model was then fitted, including `elevation_m`, the square root of `water_proximity`, and the spatially lagged elevation_m (`lag_elevation`) as predictors. The inclusion of the spatial lag variable accounts for spatial autocorrelation, helping the model to better explain variations in site presence.
+
+```r
+logit_mod_spatial <- glm(presence ~ elevation_m + sqrt(water_proximity) + lag_elevation, 
+                         data = all_sites, 
+                         family = binomial)
+```
+
+## Results
+
+The coefficients of this model showed a negative correlation between elevation and site presence, with a coefficient of -0.02, indicating that with every meter of elevation gain, the log-odds of site presence decreases by 0.02. With a p-value of <0.001, this is highly significant. It also showed that distance to water sources were statistically insignificant, with a coefficient of 0.0055, and a p-value of 0.894. This could possibly be due to the high number of creeks in the relatively small study area at Point Conception. Both these results are likely results of spatial autocorrelation.
+
+::: text-center
+![Probability of site presence vs. Elevation, the strongest predictor](pictures/elev_prox.png)
+:::
+
+
 
 Predicted probabilities of presence were then calculated for all points in the data set, using the new spatial model. This data was once again converted to a spatial feature object and mapped according to each points’ predicted probability.
 
