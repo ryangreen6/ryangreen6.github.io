@@ -21,7 +21,6 @@ editor_options:
   chunk_output_type: console
 ---
 
-
 ::: text-center
 ![Excavations on Mescalitan Island, now the Santa Barbara Airport, 1920's. From the Santa Barbara Independent](pictures/Van-Valkenburgh-Mescalitan-Island-1.jpg)
 :::
@@ -58,18 +57,19 @@ All calculations for this study were done entirely in R. To conduct this study, 
 
 I then made a logistic regression model, with the dependent variable ‘presence’, and the predictors elevation and water_proximity. This logistic regression estimates the relationship between these predictors and the likelihood of a site being present (presence = 1), using a log-odds transformation to relate the probabilities to the predictors. A square root transformation on water_proximity was used to reduce the impact of outliers and to linearize the relationship between this predictor and the log-odds of presence.
 
-```r
+``` r
 logit_mod <- glm(presence ~ elevation_m + sqrt(water_proximity), 
                  data = all_sites, 
                  family = binomial)
 ```
+
 The residuals (differences between observed and predicted values) for all points from the fitted model were then extracted and added as a column to the sites data frame, before being converted to a spatial feature object. A spatial neighborhood structure was created using the `dnearneigh` function in the package `spdep`, defining neighbors as points within 50 meters of each other. This was then used to create a spatial weights matrix using the function `nb2listw`, also in the `spdep` package, assigning weights to the relationships between points based on proximity. Then, spatial lag was calculated for the elevation variable using the `spdep` function `lag.listw`, representing a weighted average of elevation values of neighboring points[^6].
 
 [^6]: https://www.rdocumentation.org/packages/spdep/versions/1.3-8
 
 A new logistic regression model was then fitted, including `elevation_m`, the square root of `water_proximity`, and the spatially lagged elevation_m (`lag_elevation`) as predictors. The inclusion of the spatial lag variable accounts for spatial autocorrelation, helping the model to better explain variations in site presence.
 
-```r
+``` r
 logit_mod_spatial <- glm(presence ~ elevation_m + sqrt(water_proximity) + lag_elevation, 
                          data = all_sites, 
                          family = binomial)
@@ -77,13 +77,11 @@ logit_mod_spatial <- glm(presence ~ elevation_m + sqrt(water_proximity) + lag_el
 
 ## Results
 
-The coefficients of this model showed a negative correlation between elevation and site presence, with a coefficient of -0.02, indicating that with every meter of elevation gain, the log-odds of site presence decreases by 0.02. With a p-value of <0.001, this is highly significant. It also showed that distance to water sources were statistically insignificant, with a coefficient of 0.0055, and a p-value of 0.894. This could possibly be due to the high number of creeks in the relatively small study area at Point Conception. Both these results are likely results of spatial autocorrelation.
+The coefficients of this model showed a negative correlation between elevation and site presence, with a coefficient of -0.02, indicating that with every meter of elevation gain, the log-odds of site presence decreases by 0.02. With a p-value of \<0.001, this is highly significant. It also showed that distance to water sources were statistically insignificant, with a coefficient of 0.0055, and a p-value of 0.894. This could possibly be due to the high number of creeks in the relatively small study area at Point Conception. Both these results are likely results of spatial autocorrelation.
 
 ::: text-center
 ![Probability of site presence vs. Elevation, the strongest predictor](pictures/elev_prox.png)
 :::
-
-
 
 Predicted probabilities of presence were then calculated for all points in the data set, using the new spatial model. This data was once again converted to a spatial feature object and mapped according to each points’ predicted probability.
 
@@ -119,18 +117,22 @@ As a future local project, it would be interesting to apply this model to the Is
 
 Overall, APM itself cannot accurately locate archaeological sites; it can only identify areas worthy of archaeological investigation. APM seems to work best for more complex societies with a higher number of determinable predictor variables, such as in Vaughn and Crawford’s study. However, this basic use of APM on the Chumash in the Santa Barbara area provides arguably accurate results, although it is broad in its scope, and limited by data availability. Through the addition of more site data and determination of more predictor variables, this model can be refined. And while a more refined model may narrow down the most probable areas for site presence, the only way to confirm its validity is through systematic archaeological survey on the ground.
 
-_
+\_
 
+View all code for this project here, data not included: <https://github.com/ryangreen6/Chumash_Predictive_Modeling>
 
-View all code for this project here, data not included:  https://github.com/ryangreen6/Chumash_Predictive_Modeling
+The data for this project was sourced from the United States Geological Survey[^9].
+The data is as follows:
 
-The data for this project was sourced from the United States Geological Survey[^9]. 
+-   Elevation Products (3DEP), 1 arc-second GeoTIFF Digital Elevation Models. 4 tiles covering the Santa Barbara and Channel Islands area
 
-
+-   Hydrography, National Hydrography Dataset, HU-4 Subregion Shapefile, Santa Barbara area
 
 [^9]: USGS. https://apps.nationalmap.gov/downloader/
 
-_
+
+
+\_
 
 Banner photo: <https://www.independent.com/2021/02/09/appreciating-goletas-deep-and-dense-chumash-past/>
 
