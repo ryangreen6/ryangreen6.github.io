@@ -11,7 +11,7 @@ website:
 #      - href: about.qmd
 #      - href: resources.qmd
       - href: "https://www.linkedin.com/in/ryan-green-59239a174/?trk=opento_sprofile_goalscard" 
-      - text: Resume
+        text: Resume
       - href: posts.qmd
         text: Blog
   page-footer: 
