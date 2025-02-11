@@ -14,6 +14,8 @@ website:
         text: Resume
       - href: posts.qmd
         text: Blog
+      - href: photography.qmd
+        text: Photography
   page-footer: 
     background: light
     left: Copyright 2024, Ryan Green
