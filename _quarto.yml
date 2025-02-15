@@ -6,16 +6,10 @@ website:
   title: "Ryan Green"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
-#      - href: about.qmd
-#      - href: resources.qmd
       - href: "https://drive.google.com/file/d/1pPYsrOMEOLsAciXQtTcaQqJ9qIYZRQOS/view?usp=sharing" 
         text: Resume
       - href: posts.qmd
         text: Blog
-      # - href: photography.qmd
-      #   text: Photography
   page-footer: 
     background: light
     left: Copyright 2024, Ryan Green
