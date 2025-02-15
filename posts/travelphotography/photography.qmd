@@ -4,13 +4,13 @@ description: "A Selection from my Portfolio"
 author: 
   - name: Ryan Green
     url: 
-date: 2/15/24
+date: 2/15/25
 categories: [Photography, Travel]
 image: photos/DSC_0029.jpg
 format: html
 ---
 
-When I was younger, I saw a presentation by the National Geographic wildlife photographer Mattias Klum, and it inspired me to develop my photography. All I wanted when I 'grew up' was to be a photographer for National Geographic. 
+When I was younger, I saw a presentation by the National Geographic wildlife photographer Mattias Klum, and it inspired me to develop my photography. All I wanted when I 'grew up' was to be a photographer for National Geographic.
 
 Although I grew in other directions, photography has always been a passion of mine, and during my travels I've been able to capture some shots I'm proud of.
 
@@ -32,7 +32,6 @@ Below are just a few of my favorites:
 
 ![Traffic, Accra, Ghana](photos/P8201189.jpg){group="my-gallery"}
 
-
 ![Street Scene, Uyuni, Bolivia](photos/P7140068.jpg){group="my-gallery"}
 
 ![Flat, Uyuni Salt Flat, Bolivia](photos/P7150464.jpg){group="my-gallery"}
@@ -46,8 +45,6 @@ Below are just a few of my favorites:
 ![Street Barber, Accra, Ghana](photos/P8201510.jpg){group="my-gallery"}
 
 ![Quiet Morning, Cusco, Peru](photos/IMG_0692.jpeg){group="my-gallery"}
-
-
 
 ![Water Towers, Lomé, Togo](photos/PA070171.jpg){group="my-gallery"}
 
