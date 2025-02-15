@@ -121,16 +121,13 @@ Overall, APM itself cannot accurately locate archaeological sites; it can only i
 
 View all code for this project here, data not included: <https://github.com/ryangreen6/Chumash_Predictive_Modeling>
 
-The data for this project was sourced from the United States Geological Survey[^9].
-The data is as follows:
+The data for this project was sourced from the United States Geological Survey[^9]. The data is as follows:
+
+[^9]: USGS. https://apps.nationalmap.gov/downloader/
 
 -   Elevation Products (3DEP), 1 arc-second GeoTIFF Digital Elevation Models. 4 tiles covering the Santa Barbara and Channel Islands area
 
 -   Hydrography, National Hydrography Dataset, HU-4 Subregion Shapefile, Santa Barbara area
-
-[^9]: USGS. https://apps.nationalmap.gov/downloader/
-
-
 
 \_
 
