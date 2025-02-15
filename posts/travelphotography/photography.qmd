@@ -10,7 +10,7 @@ image: photos/DSC_0029.jpg
 format: html
 ---
 
-When I was younger, I saw a presentation by the National Geographic wildlife photographer Mattias Klum, and it inspired me to develop my photography. All I wanted to be when I 'grew up' was a photographer for National Geographic. 
+When I was younger, I saw a presentation by the National Geographic wildlife photographer Mattias Klum, and it inspired me to develop my photography. All I wanted when I 'grew up' was to be a photographer for National Geographic. 
 
 Although I grew in other directions, photography has always been a passion of mine, and during my travels I've been able to capture some shots I'm proud of.
 
