@@ -22,11 +22,16 @@ Below are just a few of my favorites:
 
 ![Street Colors, Lisbon, Portugal](photos/IMG_2097.jpeg){group="my-gallery"}
 
+![Boxer, Accra, Ghana](photos/P8201600.jpg){group="my-gallery"}
+
 ![Coastline, Vieques, Puerto Rico](photos/P1010074.jpg){group="my-gallery"}
 
 ![Corner Ruin, Monemvasia, Greece](photos/P6030024.jpg){group="my-gallery"}
 
 ![Witches Market, La Paz, Bolivia](photos/P7130009.jpg){group="my-gallery"}
+
+![Traffic, Accra, Ghana](photos/P8201189.jpg){group="my-gallery"}
+
 
 ![Street Scene, Uyuni, Bolivia](photos/P7140068.jpg){group="my-gallery"}
 
@@ -39,6 +44,10 @@ Below are just a few of my favorites:
 ![Boy Running Past the Door of No Return, Cape Coast Castle, Ghana](photos/P8120506.jpg){group="my-gallery"}
 
 ![Street Barber, Accra, Ghana](photos/P8201510.jpg){group="my-gallery"}
+
+![Quiet Morning, Cusco, Peru](photos/IMG_0692.jpeg){group="my-gallery"}
+
+
 
 ![Water Towers, Lomé, Togo](photos/PA070171.jpg){group="my-gallery"}
 
