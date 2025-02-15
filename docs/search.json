@@ -1,24 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "Blog",
     "section": "",
-    "text": "some text goes here!"
-  },
-  {
-    "objectID": "about.html#what-i-do-for-work",
-    "href": "about.html#what-i-do-for-work",
-    "title": "About",
-    "section": "",
-    "text": "some text goes here!"
-  },
-  {
-    "objectID": "about.html#what-else-do-i-do",
-    "href": "about.html#what-else-do-i-do",
-    "title": "About",
-    "section": "What else do I do?",
-    "text": "What else do I do?\nhere is some more text"
+    "text": "Archaeological Predictive Modeling\n\n\n\nChumash\n\n\nR\n\n\nEDS222\n\n\nLogistic Regression\n\n\n\nUsing Archaeological Predictive Modeling (APM) to Predict Locations of Chumash Cultural Sites\n\n\n\nRyan Green\n\n\nDec 10, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThomas Fire False Color Analysis\n\n\n\nFalse Color Imagery\n\n\nPython\n\n\nEDS220\n\n\n\nMapping the Thomas Fire and Calculating Land Cover Statisics Using False Color Imagery\n\n\n\nRyan Green\n\n\nDec 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTravel Photography\n\n\n\nPhotography\n\n\nTravel\n\n\n\nA Selection from my Portfolio\n\n\n\nRyan Green\n\n\nFeb 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/thomasfireanalysis/thomasfireanalysis.html",
@@ -96,12 +82,5 @@
     "title": "Ryan Green",
     "section": "",
     "text": "Ryan Green is pursuing a master’s degree in Environmental Data Science to align his career with his passion for geography and spatial data. Ryan has a BA in Geography and Archaeology from Sonoma State University after finding love for these subjects at an early age.\nDuring his senior year at Sonoma State, Ryan studied abroad at the University of Ghana, Legon, where he focused on anthropology and archaeological field methods. He participated in the fourth field season of the Gonja Project, a collaborative excavation between the University of Ghana and the University of Geneva, Switzerland. He produced stratigraphy and feature maps of the site and contributed to the annual field publication. After returning to Sonoma State, Ryan took on a geoarchaeological study for his undergraduate dissertation, analyzing soil samples from across a Native American site in northern California to determine occupational patterns over time.\nHe moved back to Santa Barbara after college and volunteered at the Natural History Museum’s Anthropology Department, where he assisted in collections management and accessioning artifacts. Ryan has always been passionate about cultural resource management and mapping, and plans to put his master’s degree to work in these fields using LiDAR and other geospatial techniques."
-  },
-  {
-    "objectID": "posts.html",
-    "href": "posts.html",
-    "title": "Blog",
-    "section": "",
-    "text": "Archaeological Predictive Modeling\n\n\n\nChumash\n\n\nR\n\n\nEDS222\n\n\nLogistic Regression\n\n\n\nUsing Archaeological Predictive Modeling (APM) to Predict Locations of Chumash Cultural Sites\n\n\n\nRyan Green\n\n\nDec 10, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThomas Fire False Color Analysis\n\n\n\nFalse Color Imagery\n\n\nPython\n\n\nEDS220\n\n\n\nMapping the Thomas Fire and Calculating Land Cover Statisics Using False Color Imagery\n\n\n\nRyan Green\n\n\nDec 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTravel Photography\n\n\n\nPhotography\n\n\nTravel\n\n\n\nA Selection from my Portfolio\n\n\n\nRyan Green\n\n\nFeb 15, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
