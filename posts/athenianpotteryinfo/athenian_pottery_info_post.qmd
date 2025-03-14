@@ -20,7 +20,7 @@ editor_options:
 ---
 
 <div style="width: 100vw; position: relative; left: 50%; margin-left: -50vw;">
-  <img src="pictures/athenian_pottery_info.png" alt="Infographic displaying development of ancient Athenian pottery decoration techniques" style="width: 40%; display: block; margin: auto;" alt="Combined Plot">
+  <img src="pictures/athenian_pottery_info.png" alt="Infographic displaying development of ancient Athenian pottery decoration techniques" style="width: 30%; display: block; margin: auto;" alt="Combined Plot">
 </div>
 
 
