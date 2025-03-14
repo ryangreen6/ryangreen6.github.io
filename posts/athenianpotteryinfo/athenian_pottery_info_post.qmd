@@ -7,7 +7,7 @@ author:
 date: 3/14/25
 format:
   html:
-      toc: true
+      toc: false
       code-fold: true
       echo: true
       message: false
