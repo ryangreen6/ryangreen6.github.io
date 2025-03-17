@@ -25,7 +25,7 @@ editor_options:
 
 Ancient Greek culture has proved to be foundational to western culture as we know it. Greek language, philosophy, science, and politics have shaped the modern world since the rise of city-states like Athens and Corinth nearly 2,800 years ago.
 
-Of the many artistic achievements of the ancient Greeks, their pottery stands out as both a practical craft and a storytelling medium. They developed distinctive decoration techniques that not only served aesthetic purposes but also preserved myths, daily life, and historical events in intricate detail. From bold contrast in black-figure pottery to the refined scenes in red-figure designs, these techniques evolved over the centuries, showcasing and preserving the Greeks’ mastery of form and narrative.
+Of the many artistic achievements of the ancient Greeks, their pottery stands out as both a practical craft and a storytelling medium. They developed decoration techniques that not only served aesthetic purposes but also preserved myths, daily life, and historical events in precise detail. From bold contrast in black-figure pottery to the refined scenes in red-figure designs, these techniques evolved over the centuries, showcasing the Greeks’ mastery of form and narrative.
 
 This infographic explores the decoration techniques used by the ancient Greeks over the centuries, and is based on more than 20,000 Athenian pottery artifacts held in the University of Oxford's Beazley Archive Pottery Database[^1]. All code for this infographic was done in R, and can be found at the bottom of this page.
 
