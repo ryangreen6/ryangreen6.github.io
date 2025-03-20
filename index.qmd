@@ -24,3 +24,5 @@ During his senior year at Sonoma State, Ryan studied abroad at the University of
 After several years in the hospitality industry as a front desk agent and hotel supervisor, Ryan worked for the international humanitarian aid organization Direct Relief. In his two years there, he managed partnerships with large hospitals and small clinics in Haiti, Liberia, Sierra Leone, Malawi, and Nepal, among others. Ryan is responsible for the arrangement and delivery of more than 60 large scale donations of medical supplies and prescription medications, from small packages to 40-foot shipping containers. Although rewarding, Ryan decided to redirect his career towards his interests in data projects. 
 
 Ryan has always been passionate about cultural resource management and mapping, and has particular interests in LiDAR, remote sensing, and other geospatial techniques. His master’s degree program has helped him develop his skills in data wrangling and analysis. 
+
+Visit the Blog page on this site to see his latest work. 
