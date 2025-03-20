@@ -13,6 +13,7 @@ format:
       message: false
       eval: false
       warning: false
+categories: [R, EDS240, Data Visualization]
 image: pictures/thumb.png
 draft: false 
 editor_options: 
