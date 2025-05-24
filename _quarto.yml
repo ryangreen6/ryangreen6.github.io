@@ -6,7 +6,7 @@ website:
   title: "Ryan Green"
   navbar:
     left:
-      - href: "https://drive.google.com/file/d/1MS_C8J8KsRtBbLfbkYMSX2ybvAS443KZ/view?usp=sharing"
+      - href: "https://drive.google.com/file/d/1G8i09BHrTX3vttVWFQk-Mnuhpg3BSLGw/view?usp=sharing"
         text: Resume
       - href: posts.qmd
         text: Blog
