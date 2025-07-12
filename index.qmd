@@ -17,7 +17,9 @@ about:
       href: mailto:ryanagreen6@gmail.com
 ---
 
-Ryan Green is currently pursing a master’s degree in Environmental Data Science through the Bren School at UCSB. Ryan graduated from Sonoma State University in 2019 with a BA in Geography and Archaeology. Ryan’s major academic projects have consistently focused on data, and related to his passions for remote sensing and archaeology. 
+
+
+Ryan Green has recently completed a master’s degree in Environmental Data Science through the Bren School at UCSB. Ryan graduated from Sonoma State University in 2019 with a BA in Geography and Archaeology. Ryan’s major academic projects have consistently focused on data, and related to his passions for remote sensing and archaeology. 
 
 For his master’s capstone project, Ryan spearheaded the machine learning effort of his project, titled “Remote Sensing of Defensible Space Compliance to Enhance Wildfire Preparedness”. This project aimed to use machine learning on remotely sensed imagery and data in Santa Barbara County to assist the county Fire Department in their annual fire safety inspections. This highly technical project was done in Python and used multiple machine learning models, including Random Forest Classifiers and XGBoost. 
 
