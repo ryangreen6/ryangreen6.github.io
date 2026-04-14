@@ -10,7 +10,7 @@ execute:
   message: false
   results: hide
   enabled: true
-categories: [Chumash, R, EDS222, Logistic Regression]
+categories: [Chumash, R, Logistic Regression]
 output:
   distill::distill_article:
     self_contained: false
