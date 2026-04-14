@@ -6,10 +6,10 @@ website:
   title: "Ryan Green"
   navbar:
     left:
-      - href: "https://drive.google.com/file/d/1G8i09BHrTX3vttVWFQk-Mnuhpg3BSLGw/view?usp=sharing"
+      - href: "https://drive.google.com/file/d/1SPH953WcCA4TST3ZHSwXDtfryY5FHvk6/view?usp=sharing"
         text: Resume
       - href: posts.qmd
-        text: Blog
+        text: Projects
   page-footer: 
     background: light
     left: Copyright 2024, Ryan Green
