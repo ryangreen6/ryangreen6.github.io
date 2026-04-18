@@ -1,0 +1,12 @@
+---
+title: "Work in Progress"
+description: "Work in Progress"
+author:
+  - name: Ryan Green
+date: 04/18/2026
+categories: [Python, GIS, Landslide]
+---
+
+Work in Progress
+
+[Open Interactive Map](susceptibility_interactive.html)
