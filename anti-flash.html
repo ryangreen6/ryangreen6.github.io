@@ -3,6 +3,9 @@
   if (localStorage.getItem('quarto-color-scheme') === 'alternate') {
     document.documentElement.classList.add('qd-preload');
   }
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.classList.remove('qd-preload');
+  });
 })();
 </script>
 <style>
