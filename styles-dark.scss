@@ -12,8 +12,7 @@ $link-color: #E8A070;
 
 /*-- scss:rules --*/
 
-.quarto-color-scheme-toggle .bi { font-family: unset !important; }
-.quarto-color-scheme-toggle .bi::before { content: "☀️" !important; }
+.quarto-color-scheme-toggle .bi::before { content: "\f5a2" !important; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $lora;
