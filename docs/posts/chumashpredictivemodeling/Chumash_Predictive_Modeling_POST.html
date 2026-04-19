@@ -105,6 +105,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script>
+(function() {
+  if (localStorage.getItem('quarto-color-scheme') === 'dark') {
+    document.documentElement.style.background = '#1E1814';
+  }
+})();
+</script>
 
 
 </head>
