@@ -17,7 +17,9 @@ website:
 
 format:
   html:
-    theme: styles.scss
+    theme:
+      light: styles.scss
+      dark: styles-dark.scss
     mainfont: Lora
 
 editor: visual

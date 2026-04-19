@@ -1,0 +1,30 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+$lora: "Lora", serif;
+
+$body-bg:   #1E1814;
+$navbar-bg: #7A3E2C;
+$footer-bg: #2D4845;
+$body-color: #F0E6DC;
+$link-color: #E8A070;
+
+/*-- scss:rules --*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $lora;
+}
+
+h1, h2 {
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+.title {
+  color: #E8927A;
+}
+
+.center-text {
+  text-align: center;
+}
