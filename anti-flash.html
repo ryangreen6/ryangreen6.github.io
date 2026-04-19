@@ -1,7 +1,13 @@
 <script>
 (function() {
-  if (localStorage.getItem('quarto-color-scheme') === 'dark') {
-    document.documentElement.style.background = '#23211F';
+  if (localStorage.getItem('quarto-color-scheme') === 'alternate') {
+    document.documentElement.classList.add('qd-preload');
   }
 })();
 </script>
+<style>
+html.qd-preload,
+html.qd-preload body { background-color: #23211F !important; }
+html.qd-preload .navbar { background-color: #3D221A !important; }
+html.qd-preload .nav-footer { background-color: #182D2B !important; }
+</style>
