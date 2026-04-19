@@ -28,8 +28,7 @@ $footer-bg: $ashgray;
 
 /*-- scss:rules --*/
 
-.quarto-color-scheme-toggle .bi { font-family: unset !important; }
-.quarto-color-scheme-toggle .bi::before { content: "🌙" !important; }
+.quarto-color-scheme-toggle .bi::before { content: "\f497" !important; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $lora;
