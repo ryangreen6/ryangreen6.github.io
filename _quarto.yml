@@ -21,6 +21,7 @@ format:
       light: styles.scss
       dark: styles-dark.scss
     mainfont: Lora
+    include-in-header: anti-flash.html
 
 editor: visual
 
