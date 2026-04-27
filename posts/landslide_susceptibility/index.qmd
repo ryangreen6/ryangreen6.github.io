@@ -5,10 +5,11 @@ author:
   - name: Ryan Green
 date: 04/27/2026
 categories: [Python, Landslide, Logistic Regression, Santa Barbara]
+image: sb_mudslide.png
 ---
 
 
-Introcution
+Introduction
 --------
 
 On January 9, 2018, a catastrophic debris flow struck Montecito, California,
