@@ -231,22 +231,22 @@ CITATIONS AND DATA SOURCES
 
 Cited Works
 
-[^1]  Kean, J.W., et al. (2019). "Inundation, flow dynamics, and damage in the
+[^1]:  Kean, J.W., et al. (2019). "Inundation, flow dynamics, and damage in the
      9 January 2018 Montecito debris-flow event, California, USA."
      Geosphere, 15(4): 1140-1163.
      https://doi.org/10.1130/GES02040.1
 
-[^2]  Oakley, N.S., et al. (2018). "Brief communication: Meteorological and
+[^2]:  Oakley, N.S., et al. (2018). "Brief communication: Meteorological and
      climatological conditions associated with the 9 January 2018 post-fire
      debris flows in Montecito and Carpinteria, California, USA."
      Natural Hazards and Earth System Sciences, 18: 3037-3043.
      https://nhess.copernicus.org/articles/18/3037/2018/
 
-[^3]  Oakley et al. (2018). Same as [2]. The Thomas Fire burned 281,893 acres
+[^3]:  Oakley et al. (2018). Same as [2]. The Thomas Fire burned 281,893 acres
      across Ventura and Santa Barbara Counties, December 4, 2017 through
      January 12, 2018.
 
-[^12] Thomas, M.A., et al. (2025). "Landslide, soil, and vegetation
+[^12]: Thomas, M.A., et al. (2025). "Landslide, soil, and vegetation
      measurements following an atmospheric river storm on January 9, 2023,
      in the Santa Ynez Mountains, California, USA." U.S. Geological Survey
      data release.
@@ -255,47 +255,47 @@ Cited Works
 
 Data Sources
 
-[^4]  Horton, J.D., San Juan, C.A., and Stoeser, D.B. (2017). USGS State
+[^4]:  Horton, J.D., San Juan, C.A., and Stoeser, D.B. (2017). USGS State
      Geologic Map Compilation (SGMC) -- California geology layer.
      U.S. Geological Survey Data Series 1052.
      https://www.usgs.gov/data/state-geologic-map-compilation-sgmc-geodatabase-conterminous-united-states
 
-[^5]  U.S. Geological Survey. GAP/LANDFIRE National Terrestrial Ecosystems
+[^5]:  U.S. Geological Survey. GAP/LANDFIRE National Terrestrial Ecosystems
      2011 -- land cover classification.
      https://www.usgs.gov/data/gaplandfire-national-terrestrial-ecosystems-2011
 
-[^6]  European Space Agency. Sentinel-2 satellite imagery -- used to derive
+[^6]:  European Space Agency. Sentinel-2 satellite imagery -- used to derive
      NDVI via Microsoft Planetary Computer.
      https://www.esa.int/Applications/Observing_the_Earth/Copernicus/Sentinel-2
 
-[^7]  USDA Natural Resources Conservation Service. Gridded Soil Survey
+[^7]:  USDA Natural Resources Conservation Service. Gridded Soil Survey
      Geographic (gSSURGO) Database -- soil erodibility (K-factor).
      https://www.nrcs.usda.gov/resources/data-and-reports/gridded-soil-survey-geographic-gssurgo-database
 
-[^8]  NOAA Hydrometeorological Design Studies Center. NOAA Atlas 14
+[^8]:  NOAA Hydrometeorological Design Studies Center. NOAA Atlas 14
      Precipitation Frequency Data Server -- 100-year/24-hour storm depth.
      https://hdsc.nws.noaa.gov/pfds/
 
-[^9]  U.S. Geological Survey. Landslide Inventories across the United States,
+[^9]:  U.S. Geological Survey. Landslide Inventories across the United States,
      ver. 3.0, February 2025 -- training and display landslide polygons.
      https://www.usgs.gov/data/landslide-inventories-across-united-states-ver-30-february-2025
 
-[^10] U.S. Geological Survey. Quaternary Fault and Fold Database of the
+[^10]: U.S. Geological Survey. Quaternary Fault and Fold Database of the
      United States -- fault lines display layer.
      https://www.usgs.gov/programs/earthquake-hazards/faults
 
-[^11] CAL FIRE Fire and Resource Assessment Program. California Fire Perimeters
+[^11]: CAL FIRE Fire and Resource Assessment Program. California Fire Perimeters
      (all) -- burn severity and fire history display layer.
      https://data.ca.gov/dataset/california-fire-perimeters-all
 
-[^13] U.S. Geological Survey, 3D Elevation Program (3DEP). 1/3 arc-second
+[^13]: U.S. Geological Survey, 3D Elevation Program (3DEP). 1/3 arc-second
      National Elevation Dataset -- digital elevation model.
      https://www.usgs.gov/3d-elevation-program
 
-[^14] Macrostrat. Geologic map API -- supplemental geology attributes.
+[^14]: Macrostrat. Geologic map API -- supplemental geology attributes.
      https://macrostrat.org/api/
 
-[^15] U.S. Census Bureau. TIGER/Line Shapefiles -- Santa Barbara County
+[^15]: U.S. Census Bureau. TIGER/Line Shapefiles -- Santa Barbara County
      administrative boundary.
      https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html
 
