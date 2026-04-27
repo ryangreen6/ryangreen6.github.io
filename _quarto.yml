@@ -10,7 +10,8 @@ website:
         text: Resume
       - href: posts.qmd
         text: Projects
-  page-footer: 
+  google-analytics: "G-R4RWHDLX9J"
+  page-footer:
     background: light
     left: Copyright 2026, Ryan Green
     right: Built with GitHub
