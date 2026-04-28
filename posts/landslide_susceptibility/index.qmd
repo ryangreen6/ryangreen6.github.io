@@ -76,7 +76,7 @@ Interactive Map
 This project outputs an interactive map of Santa Barbara County, displaying the susceptibility data along with several additional data layers: historical landslide deposit polygons from the USGS National Landslide Inventory (1,043 confirmed events)[^10], the 926 training landslide points used to build the model, Quaternary fault lines with slip-rate and age attributes[^11], CAL FIRE fire perimeters since 2016[^12], and geology[^13]. An address search tool allows users to look up the risk score and the leading contributing factors for any address in the county.
 
 
-LIMITATIONS
+Limitations
 --------
 
 1.	Training data is unevenly distributed across the county. The 926 training landslide locations are heavily concentrated in the Santa Ynez Mountains, because that is where most historical landslide mapping has been done. In other parts of the county, the lack of recorded landslides reflects gaps in data rather than a lower rate of slope failure. The model may underestimate risk in areas with fewer recorded landslides.
