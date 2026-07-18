@@ -5,7 +5,7 @@ author:
   - name: Ryan Green
 date: 04/27/2026
 categories: [Python, Landslide, Logistic Regression, Santa Barbara]
-image: sb_mudslide.png
+image: thumbnail.png
 ---
 
 
