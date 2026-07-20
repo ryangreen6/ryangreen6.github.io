@@ -79,7 +79,7 @@ The model was evaluated three ways:
 Interactive Map
 --------
 
-This project outputs an interactive map of Santa Barbara County, displaying landslide susceptibility as slope unit polygons, each classified from Very Low to Very High.
+This project outputs an interactive map of Santa Barbara County, displaying landslide susceptibility as slope unit polygons, each classified from Very Low to Very High. There is an address search bar where the user can input any address in Santa Barbara County, to see details on the susceptibility of that particular parcel.
 
 Limitations
 --------
